@@ -60,19 +60,19 @@ public class Example : MonoBehaviour
 
         if (m_joycons == null || m_joycons.Count <= 0)
         {
-            GUILayout.Label("Joy-Con が接続されていません");
+            GUILayout.Label("Joy-Con 偑愙懕偝傟偰偄傑偣傫");
             return;
         }
 
         if (!m_joycons.Any(c => c.isLeft))
         {
-            GUILayout.Label("Joy-Con (L) が接続されていません");
+            GUILayout.Label("Joy-Con (L) 偑愙懕偝傟偰偄傑偣傫");
             return;
         }
 
         if (!m_joycons.Any(c => !c.isLeft))
         {
-            GUILayout.Label("Joy-Con (R) が接続されていません");
+            GUILayout.Label("Joy-Con (R) 偑愙懕偝傟偰偄傑偣傫");
             return;
         }
 
@@ -82,7 +82,7 @@ public class Example : MonoBehaviour
         {
             var isLeft = joycon.isLeft;
             var name = isLeft ? "Joy-Con (L)" : "Joy-Con (R)";
-            var key = isLeft ? "Z キー" : "X キー";
+            var key = isLeft ? "Z 僉乕" : "X 僉乕";
             var button = isLeft ? m_pressedButtonL : m_pressedButtonR;
             var stick = joycon.GetStick();
             var gyro = joycon.GetGyro();
@@ -91,12 +91,12 @@ public class Example : MonoBehaviour
 
             GUILayout.BeginVertical(GUILayout.Width(480));
             GUILayout.Label(name);
-            GUILayout.Label(key + "：振動");
-            GUILayout.Label("押されているボタン：" + button);
-            GUILayout.Label(string.Format("スティック：({0}, {1})", stick[0], stick[1]));
-            GUILayout.Label("ジャイロ：" + gyro);
-            GUILayout.Label("加速度：" + accel);
-            GUILayout.Label("傾き：" + orientation);
+            GUILayout.Label(key + "丗怳摦");
+            GUILayout.Label("墴偝傟偰偄傞儃僞儞丗" + button);
+            GUILayout.Label(string.Format("僗僥傿僢僋丗({0}, {1})", stick[0], stick[1]));
+            GUILayout.Label("僕儍僀儘丗" + gyro);
+            GUILayout.Label("壛懍搙丗" + accel);
+            GUILayout.Label("孹偒丗" + orientation);
             GUILayout.EndVertical();
         }
 
