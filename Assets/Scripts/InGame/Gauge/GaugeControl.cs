@@ -80,6 +80,7 @@ public class GaugeControl : MonoBehaviour
             if (Input.GetKey(KeyCode.Space))
             {
                 if(gaugeCharge==2)
+                    
                     gaugeCount = (gaugeCount-0.6f)/2f;
                 else if (gaugeCharge == 1)
                     gaugeCount = (gaugeCount - 0.2f)/2f;

@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upSpeed: 0.7
-  downSpeed: 0.3
+  downSpeed: 0.05
   stopTime: 2
 --- !u!114 &133594245
 MonoBehaviour:
@@ -382,6 +382,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JumpStartSpeed: 4
   gravity: 4
+  jumpStatus: 2
 --- !u!212 &288798544
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -422,7 +423,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: d86c94489e17157488a9ca02f3ab8721, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1129,6 +1130,7 @@ MonoBehaviour:
   hasPlayer: 0
   hasEnemy: 0
   getHitted: 0
+  getavoided: 0
 --- !u!1 &1198488976
 GameObject:
   m_ObjectHideFlags: 0
@@ -1269,7 +1271,7 @@ GameObject:
   - component: {fileID: 1241348050}
   - component: {fileID: 1241348049}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

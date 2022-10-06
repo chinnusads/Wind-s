@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class PlayerController : MonoBehaviour
     private float JumpSpeed;
     private float jumpTime;
     private bool canJump;
+
+    public float Level2JumpSpeed;//2段階ジャンプのスピード
+    public float Level2Gravity;//2段階ジャンプの重力
     //
 
     void Awake()
@@ -20,11 +24,13 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.Space)) && (canJump))
-        {
-            canJump = false;
-            JumpSpeed = JumpStartSpeed;
-        }
+            if ((Input.GetKeyDown(KeyCode.Space)) && (canJump))
+            {
+                canJump = false;
+                JumpSpeed = JumpStartSpeed ;
+            }
+        
+        
         if (!canJump)
         {
             Jump();
