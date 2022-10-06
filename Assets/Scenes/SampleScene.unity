@@ -684,6 +684,7 @@ GameObject:
   - component: {fileID: 600455372}
   - component: {fileID: 600455374}
   - component: {fileID: 600455373}
+  - component: {fileID: 600455375}
   m_Layer: 5
   m_Name: Score_Count
   m_TagString: Untagged
@@ -752,6 +753,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 600455371}
   m_CullTransparentMesh: 1
+--- !u!114 &600455375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 600455371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e004027e36f39746973b1ef5092b9a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statusUp: 50
+  statusDown: 10
 --- !u!1 &648941886
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,8 +817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0d11d8323c3f7c488f9f2fe174ccc32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTime: 10
-  isCount: 0
+  maxTime: 30
 --- !u!114 &648941889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -916,7 +930,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6509434, g: 0.6417319, b: 0.6417319, a: 1}
+  m_Color: {r: 0.6509434, g: 0.6417319, b: 0.6417319, a: 0.53333336}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1150,7 +1164,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 50, y: 94}
+  m_AnchoredPosition: {x: 50, y: 89.7}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1198488978
@@ -1586,7 +1600,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Score
+  m_Text: EXP.
 --- !u!222 &2064563087
 CanvasRenderer:
   m_ObjectHideFlags: 0
