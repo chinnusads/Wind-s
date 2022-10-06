@@ -25,7 +25,7 @@ public class GaugeControl : MonoBehaviour
         {
             if (gaugeCount < 1)//ゲージ未満
             {
-                if (Input.GetKey(KeyCode.G))//入力検知
+                if (JoyconInput.charge)//入力検知
                     gaugeCount += Time.deltaTime * upSpeed; //ゲージ上昇
                 if (gaugeCount > 0.6)
                 {
