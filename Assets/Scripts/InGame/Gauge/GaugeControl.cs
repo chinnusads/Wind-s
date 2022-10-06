@@ -7,9 +7,9 @@ public class GaugeControl : MonoBehaviour
 {
     private float gaugeCount;
 
-    public float upSpeed, downSpeed;//ƒQ[ƒWã¸ƒXƒs[ƒhAŒ¸­‚ÌƒXƒs[ƒh
-    public float stopTime;//ƒI[ƒo[‚·‚é‚Æ‚«‚µ‚Î‚ç‚­“®‚¯‚È‚­‚È‚éŠÔ‘Ñ
-    public int gaugeCharge; //ƒWƒƒƒ“ƒv‚Å‚«‚é‚‚³‚ğ‹L˜^F0ƒWƒƒƒ“ƒv•s‰ÂG1ˆê’iŠKƒWƒƒƒ“ƒvG2“ñ’iŠKƒWƒƒƒ“ƒv;3O’iŠKiƒI[ƒo[j
+    public float upSpeed, downSpeed;//ã‚²ãƒ¼ã‚¸ä¸Šæ˜‡ã€è½ä¸‹ã®ã‚¹ãƒ”ãƒ¼ãƒ‰
+    public float stopTime;//ã‚¸ãƒ£ãƒ³ãƒ—ï¼“ã¾ã§è²¯ã¾ã‚‹ã¨ã©ã®ãã‚‰ã„å‹•ã‘ãªããªã‚‹
+    public int gaugeCharge; //ã‚¸ãƒ£ãƒ³ãƒ—ã®çŠ¶æ…‹ã€‚0ã‚¸ãƒ£ãƒ³ãƒ—ä¸å¯ï¼›1ä¸€æ®µéšã‚¸ãƒ£ãƒ³ãƒ—ã§ãï¼šï¼’äºŒæ®µéšã‚¸ãƒ£ãƒ³ãƒ—ã§ãï¼›ï¼“è²¯ã¾ã‚Šã™ãå‹•ã‘ãªããªã‚‹
     Image image;
     void Start()
     {
@@ -22,60 +22,60 @@ public class GaugeControl : MonoBehaviour
     
     void Update()
     {
-        //ƒQ[ƒWŒW”‚ÌŒvZ
+        //ã‚²ãƒ¼ã‚¸ã®çŠ¶æ…‹
         {
-            if (gaugeCount < 1)//ƒQ[ƒW‚ª–‚½‚µ‚Ä‚¢‚È‚¢
+            if (gaugeCount < 1)//ã‚²ãƒ¼ã‚¸æœªæº€
             {
-                if (Input.GetKey(KeyCode.G))//“ü—Í‚·‚é‚Æ
-                    gaugeCount += Time.deltaTime * upSpeed; //ƒQ[ƒW‰ÁZ
+                if (Input.GetKey(KeyCode.G))//å…¥åŠ›æ¤œçŸ¥
+                    gaugeCount += Time.deltaTime * upSpeed; //ã‚²ãƒ¼ã‚¸ä¸Šæ˜‡
                 if (gaugeCount > 0.6)
                 {
-                    gaugeCharge = 2;//“ñ’iƒWƒƒƒ“ƒv‰Â
+                    gaugeCharge = 2;//2æ®µéšã‚¸ãƒ£ãƒ³ãƒ—ã§ã
                 }
                 else if (gaugeCount > 0.2)
                 {
-                    gaugeCharge = 1;//ˆê’iƒWƒƒƒ“ƒv‰Â
+                    gaugeCharge = 1;//1æ®µéšã‚¸ãƒ£ãƒ³ãƒ—ã§ã
                 }
                 else
-                    gaugeCharge = 0;//ƒWƒƒƒ“ƒv•s‰Â
+                    gaugeCharge = 0;//ã‚¸ãƒ£ãƒ³ãƒ—ä¸å¯
             }
             else
             {
-                gaugeCount = 1;//1ˆÈã‚Ìê‡A‚P‚É‚·‚é
-                gaugeCharge = 3;//‚R’iŠKiƒI[ƒo[j
+                gaugeCount = 1;//ã‚²ãƒ¼ã‚¸æº€ã‚¿ãƒ³
+                gaugeCharge = 3;//3æ®µéš
             }
 
 
-            if (gaugeCount > 0)//ƒQ[ƒW‚Í©“®“I‚ÉŒ¸­‚·‚éˆ—
+            if (gaugeCount > 0)//è½ä¸‹ã®åˆ¤å®š
             {
-                if (gaugeCharge < 3)//”š”­‚µ‚Ä‚¢‚È‚¢
+                if (gaugeCharge < 3)//ã‚²ãƒ¼ã‚¸æœªæº€
                 {
                     gaugeCount -= Time.deltaTime * downSpeed;
-                    if (gaugeCharge == 2)//‚Q’iƒWƒƒƒ“ƒv
+                    if (gaugeCharge == 2)//2æ®µéšã¾ã§
                     {
                         if (gaugeCount < 0.6)
                             gaugeCount = 0.6f;
                     }
-                    else if (gaugeCharge == 1)//‚P’iƒWƒƒƒ“ƒv
+                    else if (gaugeCharge == 1)//1æ®µéšã¾ã§
                     {
                         if (gaugeCount < 0.2)
                             gaugeCount = 0.2f;
                     }
                 }
-                else//”š”­ó‘Ô
+                else//ã‚²ãƒ¼ã‚¸æº€ã‚¿ãƒ³
 				{
                     gaugeCount = 1;
 				}
 
             }
             else
-                gaugeCount = 0;//0‚É‚È‚Á‚½‚ç‚¸‚Á‚Æ0‚É•Û‚·‚é
+                gaugeCount = 0;//0ã®æ™‚ã¯è½ä¸‹ã—ãªã„
         }
-        //‰æ‘œ‚Æ˜A“®‚·‚é
+        //ã‚²ãƒ¼ã‚¸ã®ç”»åƒè¡¨ç¤º
         image.fillAmount = gaugeCount;
 
-        //ƒWƒƒƒ“ƒv‚·‚é‚Æˆê‹C‚ÉÁ–Õ‚·‚é
-        if (gaugeCharge <3)//”š”­‚Å‚Í‚È‚¢ó‘Ô
+        //ãƒœã‚¿ãƒ³æŠ¼ã—ãŸã‚‰ã‚²ãƒ¼ã‚¸ã‚’ä¸€æ°—ã«æ¶ˆè€—ã™ã‚‹
+        if (gaugeCharge <3)//æº€ã‚¿ãƒ³ã§ã¯ãªã„çŠ¶æ…‹
         {
             if (Input.GetKey(KeyCode.F))
             {
@@ -84,17 +84,17 @@ public class GaugeControl : MonoBehaviour
             }
         }
 
-        //‚R‚Ü‚Åƒ`ƒƒ[ƒW‚·‚é‚Æ‚µ‚Î‚ç‚­“®‚¯‚È‚­‚È‚é
+        //æº€ã‚¿ãƒ³ã«ãªã‚‹çŠ¶æ…‹
         if(gaugeCharge ==3)
 		{
-            stopTime -= Time.deltaTime;
-             if (stopTime < 0)//time out
+            stopTime -= Time.deltaTime;//ã—ã°ã‚‰ãå‹•ã‘ãªããªã‚‹
+             if (stopTime < 0)ã€€//time out
 			{
                 gaugeCharge = 0;
                 gaugeCount = 0;
             }
 		}
-        //–â‘è“_FstopTimeˆê‰ñ‚µ‚©g‚¦‚È‚¢BŒJ‚è•Ô‚·g‚¦‚é‚æ‚¤‚Éˆ—‚ğ—~‚µ‚¢B
+        //å•é¡Œç‚¹ï¼šã©ã‚“ã©ã‚“æ¸›ã£ã¦ã„ãåŠ¹æœï¼ˆï¼Ÿï¼‰
 
     }
 }
