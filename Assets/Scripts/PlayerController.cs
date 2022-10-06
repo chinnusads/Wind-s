@@ -34,6 +34,8 @@ public class PlayerController : MonoBehaviour
             this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, 0f, this.gameObject.transform.position.z);
             canJump = true;
         }    
+        
+        
     }
 
     void Jump()
