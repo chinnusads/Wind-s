@@ -5,24 +5,23 @@ using UnityEngine.UI;
 
 public class GaugeControl : MonoBehaviour
 {
-    private float gaugeCount;
-
+    private float gaugeCount,stopCount;
     public float upSpeed, downSpeed;//ゲージ上昇、落下のスピード
-    public float stopTime;//ジャンプ３まで貯まるとどのくらい動けなくなる
-    public int gaugeCharge; //ジャンプの状態。0ジャンプ不可；1一段階ジャンプでき：２二段階ジャンプでき；３貯まりすぎ動けなくなる
+    public float stopTime;//ジャンプ３まで貯まるとしばらく動けなくなる
+    private int gaugeCharge; //ジャンプの状態。0ジャンプ不可；1一段階ジャンプでき：２二段階ジャンプでき；３貯まりすぎ動けなくなる
     Image image;
     void Start()
     {
         gaugeCount = 0;
         gaugeCharge = 0;
         image = GetComponent<Image>();
-    
+        stopCount = stopTime;
     }
 
     
     void Update()
     {
-        //ゲージの状態
+        //ゲージ上昇時の段階分け
         {
             if (gaugeCount < 1)//ゲージ未満
             {
@@ -87,14 +86,15 @@ public class GaugeControl : MonoBehaviour
         //満タンになる状態
         if(gaugeCharge ==3)
 		{
-            stopTime -= Time.deltaTime;//しばらく動けなくなる
-             if (stopTime < 0)　//time out
+            stopCount -= Time.deltaTime;//しばらく動けなくなる
+             if (stopCount < 0)　//time out
 			{
                 gaugeCharge = 0;
                 gaugeCount = 0;
+                stopCount = stopTime;
             }
 		}
-        //問題点：どんどん減っていく効果（？）
+        //改善点：ゲージは一瞬で落ちるではなく、徐々に落ちで行く。
 
     }
 }
