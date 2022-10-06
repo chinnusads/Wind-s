@@ -8,7 +8,7 @@ public class GaugeControl : MonoBehaviour
     private float gaugeCount,stopCount;
     public float upSpeed, downSpeed;//ゲージ上昇、落下のスピード
     public float stopTime;//ジャンプ３まで貯まるとしばらく動けなくなる
-    private int gaugeCharge; //ジャンプの状態。0ジャンプ不可；1一段階ジャンプでき：２二段階ジャンプでき；３貯まりすぎ動けなくなる
+    public static int gaugeCharge; //ジャンプの状態。0ジャンプ不可；1一段階ジャンプでき：２二段階ジャンプでき；３貯まりすぎ動けなくなる
     Image image;
     void Start()
     {
