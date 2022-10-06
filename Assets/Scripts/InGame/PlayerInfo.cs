@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerInfo : MonoBehaviour
 {
-    public static float playerY;
+    public static float playerY;//プレイヤーのy軸座標を取得する⇒カメラの運動につながる
     void Start()
     {
         
