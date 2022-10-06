@@ -10,6 +10,7 @@ public class GaugeControl : MonoBehaviour
     public float stopTime;//ジャンプ３まで貯まるとしばらく動けなくなる
     public static int gaugeCharge; //ジャンプの状態。0ジャンプ不可；1一段階ジャンプでき：２二段階ジャンプでき；３貯まりすぎ動けなくなる
     Image image;
+    
     void Start()
     {
         gaugeCount = 0;
@@ -74,12 +75,16 @@ public class GaugeControl : MonoBehaviour
         image.fillAmount = gaugeCount;
 
         //ボタン押したらゲージを一気に消耗する
-        if (gaugeCharge <3)//満タンではない状態
+        if ((gaugeCharge <3)&&(gaugeCharge>0))//満タンではない状態・ジャンプできる状態⇒ジャンプできる状態
         {
-            if (Input.GetKey(KeyCode.F))
+            if (Input.GetKey(KeyCode.Space))
             {
+                if(gaugeCharge==2)
+                    gaugeCount = (gaugeCount-0.6f)/2f;
+                else if (gaugeCharge == 1)
+                    gaugeCount = (gaugeCount - 0.2f)/2f;
+                
                 gaugeCharge = 0;
-                gaugeCount = 0;
             }
         }
 
@@ -94,7 +99,7 @@ public class GaugeControl : MonoBehaviour
                 stopCount = stopTime;
             }
 		}
-        //改善点：ゲージは一瞬で落ちるではなく、徐々に落ちで行く。
+        //改善可能の点：ゲージは一瞬で落ちるではなく、徐々に落ちで行く。
 
     }
 }
