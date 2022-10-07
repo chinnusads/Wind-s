@@ -587,7 +587,7 @@ public class Joycon
         {
             if (buf_[i] != 0xff)
             {
-                Debug.Log("Using user stick calibration data.");
+                //Debug.Log("Using user stick calibration data.");
                 found = true;
                 break;
             }

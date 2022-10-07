@@ -14,6 +14,16 @@ public class Example : MonoBehaviour
     private Joycon.Button? m_pressedButtonL;
     private Joycon.Button? m_pressedButtonR;
 
+    public bool startCounting;
+    public float maxGyroX, minGyroX, maxGyroY, minGyroY, maxGyroZ, minGyroZ;
+    public float averageGyroX, averageGyroY, averageGyroZ;
+    public float maxAccelX, minAccelX, maxAccelY, minAccelY, maxAccelZ, minAccelZ;
+    public float averageAccelX, averageAccelY, averageAccelZ;
+    public float distanceX,distanceY,distanceZ;
+    float totalGyroX, totalGyroY, totalGyroZ;
+    float totalAccelX, totalAccelY, totalAccelZ;
+    float countingTime;
+
     private void Start()
     {
         m_joycons = JoyconManager.Instance.j;
@@ -22,6 +32,14 @@ public class Example : MonoBehaviour
 
         m_joyconL = m_joycons.Find(c => c.isLeft);
         m_joyconR = m_joycons.Find(c => !c.isLeft);
+
+        startCounting = false;
+        totalGyroX = 0f;
+        totalGyroY = 0f;
+        totalGyroZ = 0f;
+        totalAccelX = 0f;
+        totalAccelY = 0f;
+        totalAccelZ = 0f;
     }
 
     private void Update()
@@ -51,6 +69,82 @@ public class Example : MonoBehaviour
         {
             m_joyconR.SetRumble(160, 320, 0.6f, 200);
         }
+
+        KeyboardControl();
+        Reset();
+        Counting();
+        
+    }
+
+    void Counting()
+    {
+        if (startCounting)
+        {
+            foreach (var joycon in m_joycons)
+            {
+                if(!joycon.isLeft)
+                {
+                    var joyconR = joycon;
+                    Vector3 gyro = joyconR.GetGyro();
+                    Vector3 accel = joyconR.GetAccel();
+                    distanceX += gyro.x * Time.deltaTime;
+                    distanceY += gyro.y * Time.deltaTime;
+                    distanceZ += gyro.z * Time.deltaTime;
+                }
+            }
+            countingTime += Time.deltaTime;
+        }
+        else
+        {
+            if (countingTime != 0f)
+            {
+                countingTime = 0f;
+            }
+        }
+    }
+
+    void KeyboardControl()
+    {
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            startCounting = !startCounting;
+            if (startCounting)
+            {
+                Debug.Log("Start");
+            }
+            else
+            {
+                Debug.Log("Stop");
+            }
+        }
+    }
+
+    void Reset()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            maxAccelX = 0;
+            maxAccelY = 0;
+            maxAccelZ = 0;
+            maxGyroX = 0;
+            maxGyroY = 0;
+            maxGyroZ = 0;
+            minAccelX = 0;
+            minAccelY = 0;
+            minAccelZ = 0;
+            minGyroX = 0;
+            minGyroY = 0;
+            minGyroZ = 0;
+            totalGyroX = 0f;
+            totalGyroY = 0f;
+            totalGyroZ = 0f;
+            totalAccelX = 0f;
+            totalAccelY = 0f;
+            totalAccelZ = 0f;
+            distanceX = 0f;
+            distanceY = 0f;
+            distanceZ = 0f;
+        }
     }
 
     private void OnGUI()
@@ -60,19 +154,19 @@ public class Example : MonoBehaviour
 
         if (m_joycons == null || m_joycons.Count <= 0)
         {
-            GUILayout.Label("Joy-Con が接続されていません");
+            GUILayout.Label("Joy-Con can't find");
             return;
         }
 
         if (!m_joycons.Any(c => c.isLeft))
         {
-            GUILayout.Label("Joy-Con (L) が接続されていません");
+            GUILayout.Label("Joy-Con (L) can't find");
             return;
         }
 
         if (!m_joycons.Any(c => !c.isLeft))
         {
-            GUILayout.Label("Joy-Con (R) が接続されていません");
+            GUILayout.Label("Joy-Con (R) can't find");
             return;
         }
 
@@ -82,7 +176,7 @@ public class Example : MonoBehaviour
         {
             var isLeft = joycon.isLeft;
             var name = isLeft ? "Joy-Con (L)" : "Joy-Con (R)";
-            var key = isLeft ? "Z キー" : "X キー";
+            var key = isLeft ? "Z KEY" : "X KEY";
             var button = isLeft ? m_pressedButtonL : m_pressedButtonR;
             var stick = joycon.GetStick();
             var gyro = joycon.GetGyro();
@@ -91,12 +185,12 @@ public class Example : MonoBehaviour
 
             GUILayout.BeginVertical(GUILayout.Width(480));
             GUILayout.Label(name);
-            GUILayout.Label(key + "：振動");
-            GUILayout.Label("押されているボタン：" + button);
-            GUILayout.Label(string.Format("スティック：({0}, {1})", stick[0], stick[1]));
-            GUILayout.Label("ジャイロ：" + gyro);
-            GUILayout.Label("加速度：" + accel);
-            GUILayout.Label("傾き：" + orientation);
+            GUILayout.Label(key + "｣ｺshake");
+            GUILayout.Label("your are pushing｣ｺ" + button);
+            GUILayout.Label(string.Format("stick｣ｺ({0}, {1})", stick[0], stick[1]));
+            GUILayout.Label("gyro｣ｺ" + gyro);
+            GUILayout.Label("accel｣ｺ" + accel);
+            GUILayout.Label("orientation｣ｺ" + orientation);
             GUILayout.EndVertical();
         }
 
