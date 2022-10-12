@@ -11,6 +11,7 @@ public class GaugeControl : MonoBehaviour
     public static int gaugeCharge; //ジャンプの状態。0ジャンプ不可；1一段階ジャンプでき：２二段階ジャンプでき；３貯まりすぎ動けなくなる
     Image image;
     
+    
     void Start()
     {
         gaugeCount = 0;
@@ -74,18 +75,25 @@ public class GaugeControl : MonoBehaviour
         //ゲージの画像表示
         image.fillAmount = gaugeCount;
 
-        //ボタン押したらゲージを一気に消耗する
+        //ボタン押したらゲージを消耗する
         if ((gaugeCharge <3)&&(gaugeCharge>0))//満タンではない状態・ジャンプできる状態⇒ジャンプできる状態
         {
-            if (Input.GetKey(KeyCode.Space))
+            if(PlayerController.canJump)//プレイヤーは空中ではない
             {
-                if(gaugeCharge==2)
-                    
-                    gaugeCount = (gaugeCount-0.6f)/2f;
-                else if (gaugeCharge == 1)
-                    gaugeCount = (gaugeCount - 0.2f)/2f;
-                
-                gaugeCharge = 0;
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    if(gaugeCharge==2)//2段ジャンプ
+                    {
+                        gaugeCount = gaugeCount - 0.6f;
+                        PlayerController.isJump2 = true;
+                    }
+                    else if (gaugeCharge == 1)//1段ジャンプ
+                    {
+                        gaugeCount =gaugeCount - 0.2f;
+                        PlayerController.isJump1 = true;
+                    }
+                gaugeCharge = 0;//ジャンプ不可
+                }
             }
         }
 

@@ -7,30 +7,46 @@ public class PlayerController : MonoBehaviour
 {
     //jump
     public float JumpStartSpeed;
-    public float gravity;
+    public float gravityDown,gravityUp;//上昇する時の重力/落下する時の重力
     private float JumpSpeed;
     private float jumpTime;
-    private bool canJump;
+    public static bool canJump;
 
     public float Level2JumpSpeed;//2段階ジャンプのスピード
-    public float Level2Gravity;//2段階ジャンプの重力
+    //public float Level2Gravity;//2段階ジャンプの重力
     //
+    public static bool isJump1, isJump2;
 
     void Awake()
     {
         canJump = true;
         JumpSpeed = 0f;
+        isJump1 = false;
+        isJump2 = false;
     }
 
     void Update()
     {
-            if ((Input.GetKeyDown(KeyCode.Space)) && (canJump))
+        if ((Input.GetKeyDown(KeyCode.Space)) && (canJump))
+        {
+            if (isJump1)
             {
+                Debug.Log(("jump1"));
                 canJump = false;
-                JumpSpeed = JumpStartSpeed ;
+                JumpSpeed = JumpStartSpeed; //1段ジャンプ
+                isJump1 = false;
             }
-        
-        
+            else if (isJump2)
+            {
+                Debug.Log(("jump2"));
+                canJump = false;
+                JumpSpeed = Level2JumpSpeed;//2段ジャンプ
+                isJump2 = false;
+            }
+            
+        }
+
+
         if (!canJump)
         {
             Jump();
@@ -44,16 +60,29 @@ public class PlayerController : MonoBehaviour
         
     }
 
+    //jumpの高さ
     void Jump()
     {
-        SpeedUpdate();
+        //SpeedUpdate();
+        if (JumpSpeed > 0)
+        {
+            SpeedUp();
+        }
+        else
+        {
+             SpeedDown();
+        }
+        
         this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y +  JumpSpeed * Time.deltaTime, this.gameObject.transform.position.z);
     }
-
-    void SpeedUpdate()
+    //重力のある状態をマネする
+    void SpeedUp()
     {
-        JumpSpeed = JumpSpeed  - gravity * Time.deltaTime;
+        JumpSpeed = JumpSpeed  - gravityUp * Time.deltaTime;
     }
-
+    void SpeedDown()
+    {
+        JumpSpeed = JumpSpeed  - gravityDown * Time.deltaTime;
+    }
     
 }
