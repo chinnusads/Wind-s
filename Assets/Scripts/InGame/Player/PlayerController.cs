@@ -7,13 +7,13 @@ public class PlayerController : MonoBehaviour
 {
     //jump
     public float JumpStartSpeed;
-    public float gravity;
+    public float gravityDown,gravityUp;//上昇する時の重力/落下する時の重力
     private float JumpSpeed;
     private float jumpTime;
     public static bool canJump;
 
     public float Level2JumpSpeed;//2段階ジャンプのスピード
-    public float Level2Gravity;//2段階ジャンプの重力
+    //public float Level2Gravity;//2段階ジャンプの重力
     //
     public static bool isJump1, isJump2;
 
@@ -60,17 +60,29 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    //重力のある状態をマネする
+    //jumpの高さ
     void Jump()
     {
-        SpeedUpdate();
+        //SpeedUpdate();
+        if (JumpSpeed > 0)
+        {
+            SpeedUp();
+        }
+        else
+        {
+             SpeedDown();
+        }
+        
         this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y +  JumpSpeed * Time.deltaTime, this.gameObject.transform.position.z);
     }
-
-    void SpeedUpdate()
+    //重力のある状態をマネする
+    void SpeedUp()
     {
-        JumpSpeed = JumpSpeed  - gravity * Time.deltaTime;
+        JumpSpeed = JumpSpeed  - gravityUp * Time.deltaTime;
     }
-
+    void SpeedDown()
+    {
+        JumpSpeed = JumpSpeed  - gravityDown * Time.deltaTime;
+    }
     
 }
