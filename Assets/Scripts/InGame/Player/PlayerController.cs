@@ -12,8 +12,8 @@ public class PlayerController : MonoBehaviour
     private float nowJumpTime;
     public static bool canJump;
     public static bool isJump1, isJump2;
-    private bool firstTimeJump;//1回目のジャンプ
     
+
 
     void Awake()
     {
@@ -21,36 +21,22 @@ public class PlayerController : MonoBehaviour
         jumpSpeed = 0f;
         isJump2 = false;
         isJump1 = false;
-        firstTimeJump = true;
     }
 
     void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.Space))&& (canJump))
+        if ((Input.GetKeyDown(KeyCode.Space))&&(canJump))
         {
-            if(firstTimeJump)//これは一回目のジャンプとしたら
-            {
-                if (isJump1 || isJump2)
+               if (isJump1 || isJump2)
                 {
                     Debug.Log(("isJump1-"));
-                    //canJump = false;
-                    nowJumpTime = 0f;
-                }
-                firstTimeJump = false;
-            }
-            else if (!firstTimeJump)//もう二回目のジャンプとしたら
-            {
-                if ()//2回目
-                {
-                    Debug.Log(("isJump2-1"));
                     canJump = false;
                     nowJumpTime = 0f;
+                    Jump();
                 }
-                
-                
-            }
+            
         }
-        if ((!canJump)||(!firstTimeJump))
+        if ((!canJump))
         {
             Jump();
         }
@@ -62,7 +48,7 @@ public class PlayerController : MonoBehaviour
             jumpSpeed = 0f;
             isJump2 = false;
             isJump1 = false;
-            firstTimeJump = true;
+            
         }
     }
 
