@@ -7,12 +7,12 @@ public class PlayerController : MonoBehaviour
     //jump
     public float jumpStartSpeed1, jumpStartSpeed2;
     public float gravity1, gravity2;
-    public float jumpTime1,jumpTime2;//uptime only
+    public float jumpTime1, jumpTime2;//uptime only
     private float jumpSpeed;
     private float nowJumpTime;
     public static bool canJump;
-    [SerializeField]public static bool isJump1, isJump2;
-    
+    public static bool isJump1, isJump2;
+
 
     void Awake()
     {
@@ -24,15 +24,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (canJump)
+        if ((Input.GetKeyDown(KeyCode.Space)) && (canJump))
         {
-            if ((Input.GetKeyDown(KeyCode.Space)) || (JoyconInput.jump))
+            if (isJump1 || isJump2)
             {
-                if (isJump1 || isJump2)
-                {
-                    canJump = false;
-                    nowJumpTime = 0f;
-                }
+                canJump = false;
+                nowJumpTime = 0f;
             }
         }
         if (!canJump)
