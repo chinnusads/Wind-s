@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class DoubleFireBallController : MonoBehaviour
 {
     private GameObject player;
     Vector3 direction;
@@ -11,8 +11,9 @@ public class EnemyController : MonoBehaviour
 
     void Awake()
     {
-        player = GameObject.Find("PlayerColliderShort");
-        direction = player.transform.position - this.gameObject.transform.position;
+        player = GameObject.Find("PlayerColliderTall");
+        Vector3 pos = new Vector3(player.transform.position.x, player.transform.position.y - 0.5f, player.transform.position.z);
+        direction = pos - this.gameObject.transform.position;
         direction = direction.normalized;
     }
 
@@ -30,5 +31,5 @@ public class EnemyController : MonoBehaviour
         this.gameObject.transform.Translate(direction * moveSpeed * Time.fixedDeltaTime);
     }
 
-    
+
 }

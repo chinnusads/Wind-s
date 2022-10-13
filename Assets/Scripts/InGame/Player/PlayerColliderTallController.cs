@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerColliderController : MonoBehaviour
+public class PlayerColliderTallController : MonoBehaviour
 {
-    [SerializeField]private bool hasPlayer, hasEnemy;
-    public bool getHitted,getavoided;
+    [SerializeField] private bool hasPlayer, hasEnemy;
+    public bool getHitted, getavoided;
 
     void Awake()
     {
@@ -17,32 +17,32 @@ public class PlayerColliderController : MonoBehaviour
 
     void Update()
     {
-        if (getHitted)//å½“ãŸã£ãŸ
+        if (getHitted)//µ±¤¿¤Ã¤¿
         {
             getHitted = false;
             Debug.Log("hitted");
-            ScoreControl.scoreCountDown++; //scoreè¨ˆç®—
+            ScoreControl.scoreCountDown++; //scoreÓ‹Ëã
         }
 
-        if (getavoided)//é¿ã‘ãŸ
+        if (getavoided)//±Ü¤±¤¿
         {
             getavoided = false;
             Debug.Log(("avoided"));
-            ScoreControl.scoreCountUp++;//scoreè¨ˆç®—
+            ScoreControl.scoreCountUp++;//scoreÓ‹Ëã
         }
-        if ((hasPlayer) && (hasEnemy))ã€€//å½“ãŸã‚‹åˆ¤å®š
+        if ((hasPlayer) && (hasEnemy))¡¡//µ±¤¿¤ëÅĞ¶¨
         {
             getHitted = true;
             hasEnemy = false;
         }
-        if ((!hasPlayer) && (hasEnemy))//é¿ã‘ã‚‹åˆ¤å®š
+        if ((!hasPlayer) && (hasEnemy))//±Ü¤±¤ëÅĞ¶¨
         {
             getavoided = true;
             hasEnemy = false;
         }
 
-        
-    }   
+
+    }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
@@ -53,7 +53,7 @@ public class PlayerColliderController : MonoBehaviour
                     hasPlayer = true;
                     break;
                 }
-            case "Enemy":
+            case "DoubleFireBall":
                 {
                     hasEnemy = true;
                     break;
@@ -70,7 +70,7 @@ public class PlayerColliderController : MonoBehaviour
                     hasPlayer = false;
                     break;
                 }
-            case "Enemy":
+            case "DoubleFireBall":
                 {
                     hasEnemy = false;
                     break;

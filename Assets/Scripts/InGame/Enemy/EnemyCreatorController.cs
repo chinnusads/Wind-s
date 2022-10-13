@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class EnemyCreatorController : MonoBehaviour
 {
-    public GameObject enemyPrefab;
+    public GameObject fireBallPrefab;
+    public GameObject doubleFireBallPrefab;
     Vector3 position;
     public int enemyTotalNum;
     private int enemyCount;
@@ -12,6 +13,7 @@ public class EnemyCreatorController : MonoBehaviour
     private float waitTime;
     public  float lengthX, lengthY;
     private float newEnemyPositionX, newEnemyPositionY;
+    private int enemyType;
 
     void Awake()
     {
@@ -25,13 +27,32 @@ public class EnemyCreatorController : MonoBehaviour
         {
             if (waitTime >= 2f)
             {
+                EnemyType();
                 bornPosition();
-                Instantiate(enemyPrefab, new Vector3(newEnemyPositionX, newEnemyPositionY, 0), Quaternion.Euler(0, 0, 0));
+                switch (enemyType)
+                {
+                    case 1:
+                        {
+                            Instantiate(doubleFireBallPrefab, new Vector3(newEnemyPositionX, newEnemyPositionY, 0), Quaternion.Euler(0, 0, 0));
+                            break;
+                        }
+                    case 2:
+                        {
+                            Instantiate(fireBallPrefab, new Vector3(newEnemyPositionX, newEnemyPositionY, 0), Quaternion.Euler(0, 0, 0));
+                            break;
+                        }
+
+                }
                 enemyCount++;   
                 waitTime = 0;
             }
         }
         waitTime += Time.fixedDeltaTime;
+    }
+
+    void EnemyType()
+    {
+        enemyType = Random.Range(1, 3);
     }
 
     void bornPosition()
