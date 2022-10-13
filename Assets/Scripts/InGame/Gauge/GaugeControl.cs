@@ -10,6 +10,7 @@ public class GaugeControl : MonoBehaviour
     public float stopTime;//ジャンプ３まで貯まるとしばらく動けなくなる
     public static int gaugeCharge; //ジャンプの状態。0ジャンプ不可；1一段階ジャンプでき：２二段階ジャンプでき；３貯まりすぎ動けなくなる
     Image image;
+    private int JumpCount;
     
     
     void Start()
@@ -27,8 +28,9 @@ public class GaugeControl : MonoBehaviour
         {
             if (gaugeCount < 1)//ゲージ未満
             {
-                if ((JoyconInput.charge)||(Input.GetKey(KeyCode.G)))//入力検知
-                    gaugeCount += Time.deltaTime * upSpeed; //ゲージ上昇
+                if(PlayerController.canJump)//プレイヤーは着地している
+                    if ((JoyconInput.charge)||(Input.GetKey(KeyCode.G)))//入力検知
+                        gaugeCount += Time.deltaTime * upSpeed; //ゲージ上昇
                 if (gaugeCount > 0.6)
                 {
                     gaugeCharge = 2;//2段階ジャンプでき
@@ -75,27 +77,32 @@ public class GaugeControl : MonoBehaviour
         //ゲージの画像表示
         image.fillAmount = gaugeCount;
 
-        //ボタン押したらゲージを消耗する
+        //ボタン押したらゲージを消耗する:2回ジャンプシステム
         if ((gaugeCharge <3)&&(gaugeCharge>0))//満タンではない状態・ジャンプできる状態⇒ジャンプできる状態
         {
-            if(PlayerController.canJump)//プレイヤーは空中ではない
-            {
-                if (Input.GetKey(KeyCode.Space))
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    if(gaugeCharge==2)//2段ジャンプ
+                    if(gaugeCharge==2)//高さ２ジャンプ
                     {
                         gaugeCount = gaugeCount - 0.6f;
+                        Debug.Log(gaugeCount);
                         PlayerController.isJump2 = true;
+                        if(gaugeCount>0.2)
+                        {
+                            gaugeCharge = 1;
+                        }
+                        else gaugeCharge = 0;
                     }
-                    else if (gaugeCharge == 1)//1段ジャンプ
+                    else if (gaugeCharge == 1)//高さ１ジャンプ
                     {
                         gaugeCount =gaugeCount - 0.2f;
                         PlayerController.isJump1 = true;
+                        gaugeCharge = 0;//ジャンプ不可
                     }
-                gaugeCharge = 0;//ジャンプ不可
+                
                 }
 
-            }
+            
         }
 
         //満タンになる状態
