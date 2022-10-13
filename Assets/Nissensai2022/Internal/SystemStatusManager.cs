@@ -1,8 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Nissensai2022.Runtime;
 using UnityEngine;
@@ -22,7 +19,7 @@ namespace Nissensai2022.Internal
 
     internal class SystemStatusManager : MonoBehaviour
     {
-        internal static SystemStatusManager Instance;
+        internal static SystemStatusManager Instance = null;
 
         [Header("基本設定")] [Space(10)] [SerializeField]
         private LogLevel logLevel = LogLevel.Debug;
@@ -106,7 +103,6 @@ namespace Nissensai2022.Internal
                 Instance = this;
                 DontDestroyOnLoad(gameObject);
             }
-
             Logger.Level = logLevel;
             BaseUrl = useSSL ? "https://" : "http://";
             BaseUrl += server;

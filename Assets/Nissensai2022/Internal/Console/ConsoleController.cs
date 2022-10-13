@@ -1,11 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Nissensai2022.Console
 {
+    [DefaultExecutionOrder(-300)]
     internal class ConsoleController : MonoBehaviour
     {
         [SerializeField] InputField inputField;

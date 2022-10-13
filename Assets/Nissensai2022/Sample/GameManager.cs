@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using Nissensai2022.Runtime;
-//using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Nissensai2022.Sample

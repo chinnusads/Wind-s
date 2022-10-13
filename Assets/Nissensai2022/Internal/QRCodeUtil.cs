@@ -1,6 +1,4 @@
 using UnityEngine;
-using System.Collections;
-using GluonGui.WorkspaceWindow.Views.WorkspaceExplorer.Configuration;
 using ZXing;
 using ZXing.QrCode;
 
