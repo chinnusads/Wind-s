@@ -40,9 +40,13 @@ public class PlayerController : MonoBehaviour
             }
             else if (!firstTimeJump)//もう二回目のジャンプとしたら
             {
-                Debug.Log(("isJump2-1"));
-                canJump = false;
-                nowJumpTime = 0f;
+                if ()//2回目
+                {
+                    Debug.Log(("isJump2-1"));
+                    canJump = false;
+                    nowJumpTime = 0f;
+                }
+                
                 
             }
         }
@@ -66,7 +70,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isJump1)
         {
-            Debug.Log("jump1-1");
+            //Debug.Log("jump1-1");
             if (nowJumpTime >= jumpTime1)
             {
                 JumpDown(gravity1);
@@ -78,7 +82,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (isJump2)
         {
-            Debug.Log("jump1-2");
+            //Debug.Log("jump1-2");
             if (nowJumpTime < jumpTime2)
             {
                 JumpUp(jumpStartSpeed2);
