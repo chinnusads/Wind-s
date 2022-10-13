@@ -2,51 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-
 public class PlayerController : MonoBehaviour
 {
     //jump
-    public float JumpStartSpeed;
-    public float gravityDown,gravityUp;//上昇する時の重力/落下する時の重力
-    private float JumpSpeed;
-    private float jumpTime;
-    public static bool canJump;
-
-    public float Level2JumpSpeed;//2段階ジャンプのスピード
-    //public float Level2Gravity;//2段階ジャンプの重力
-    //
+    public float jumpStartSpeed1, jumpStartSpeed2;
+    public float gravity1, gravity2;
+    public float jumpTime1,jumpTime2;//uptime only
+    private float jumpSpeed;
+    private float nowJumpTime;
+    private bool canJump;
     public static bool isJump1, isJump2;
+    
 
     void Awake()
     {
         canJump = true;
-        JumpSpeed = 0f;
-        isJump1 = false;
+        jumpSpeed = 0f;
         isJump2 = false;
+        isJump1 = false;
     }
 
     void Update()
     {
         if ((Input.GetKeyDown(KeyCode.Space)) && (canJump))
         {
-            if (isJump1)
+            if (isJump1 || isJump2)
             {
-                Debug.Log(("jump1"));
                 canJump = false;
-                JumpSpeed = JumpStartSpeed; //1段ジャンプ
-                isJump1 = false;
+                nowJumpTime = 0f;
             }
-            else if (isJump2)
-            {
-                Debug.Log(("jump2"));
-                canJump = false;
-                JumpSpeed = Level2JumpSpeed;//2段ジャンプ
-                isJump2 = false;
-            }
-            
         }
-
-
         if (!canJump)
         {
             Jump();
@@ -55,34 +40,53 @@ public class PlayerController : MonoBehaviour
         {
             this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, 0f, this.gameObject.transform.position.z);
             canJump = true;
-        }    
-        
-        
+            nowJumpTime = 0f;
+            jumpSpeed = 0f;
+            isJump2 = false;
+            isJump1 = false;
+        }
     }
 
-    //jumpの高さ
     void Jump()
     {
-        //SpeedUpdate();
-        if (JumpSpeed > 0)
+        if (isJump1)
         {
-            SpeedUp();
+            if (nowJumpTime >= jumpTime1)
+            {
+                JumpDown(gravity1);
+            }
+            else
+            {
+                JumpUp(jumpStartSpeed1);
+            }
         }
-        else
+        else if (isJump2)
         {
-             SpeedDown();
+            if (nowJumpTime < jumpTime2)
+            {
+                JumpUp(jumpStartSpeed2);
+            }
+            else
+            {
+                JumpDown(gravity2);
+            }
         }
-        
-        this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y +  JumpSpeed * Time.deltaTime, this.gameObject.transform.position.z);
+        this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y +  jumpSpeed * Time.deltaTime, this.gameObject.transform.position.z);
+        nowJumpTime += Time.deltaTime;
     }
-    //重力のある状態をマネする
-    void SpeedUp()
+
+    void JumpUp(float jumpStartSpeed)
     {
-        JumpSpeed = JumpSpeed  - gravityUp * Time.deltaTime;
+        jumpSpeed = jumpStartSpeed;
     }
-    void SpeedDown()
+
+    void JumpDown(float gravity)
     {
-        JumpSpeed = JumpSpeed  - gravityDown * Time.deltaTime;
+        if (jumpSpeed > 0f)
+        {
+            jumpSpeed = 0f;
+        }
+        jumpSpeed -= gravity * Time.deltaTime;
     }
-    
+
 }

@@ -94,6 +94,7 @@ public class GaugeControl : MonoBehaviour
                     }
                 gaugeCharge = 0;//ジャンプ不可
                 }
+
             }
         }
 
