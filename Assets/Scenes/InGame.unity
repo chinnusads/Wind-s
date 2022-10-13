@@ -380,12 +380,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 277beaa3ffd0a534d88a0b1b347e71b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpStartSpeed1: 2
+  jumpStartSpeed1: 3
   jumpStartSpeed2: 4
-  gravity1: 4
-  gravity2: 6
-  jumpTime1: 1
-  jumpTime2: 2
+  gravity1: 2
+  gravity2: 4
+  jumpTime1: 0.7
+  jumpTime2: 1
 --- !u!212 &288798544
 SpriteRenderer:
   m_ObjectHideFlags: 0

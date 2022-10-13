@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public float jumpTime1,jumpTime2;//uptime only
     private float jumpSpeed;
     private float nowJumpTime;
-    private bool canJump;
+    public static bool canJump;
     public static bool isJump1, isJump2;
     
 
