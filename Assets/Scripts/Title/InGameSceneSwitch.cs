@@ -29,7 +29,7 @@ public class InGameSceneSwitch : MonoBehaviour
         }
         if (timer > lateTime)
         {
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("InGame");
             timer = 0;
             isCount = false;
         } 

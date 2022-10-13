@@ -1,0 +1,16 @@
+{
+    "name": "Nissensai2022.Sample",
+    "rootNamespace": "",
+    "references": [
+        "GUID:9a571dfb7db552c4498d41c67b1de457"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
