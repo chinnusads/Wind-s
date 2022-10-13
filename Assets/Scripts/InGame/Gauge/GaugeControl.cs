@@ -8,7 +8,7 @@ public class GaugeControl : MonoBehaviour
     private float gaugeCount,stopCount;
     public float upSpeed, downSpeed;//ゲージ上昇、落下のスピード
     public float stopTime;//ジャンプ３まで貯まるとしばらく動けなくなる
-    public static int gaugeCharge; //ジャンプの状態。0ジャンプ不可；1一段階ジャンプでき：２二段階ジャンプでき；３貯まりすぎ動けなくなる
+    private int gaugeCharge; //ジャンプの状態。0ジャンプ不可；1一段階ジャンプでき：２二段階ジャンプでき；３貯まりすぎ動けなくなる
     Image image;
     
     
@@ -24,54 +24,49 @@ public class GaugeControl : MonoBehaviour
     void Update()
     {
         //ゲージ上昇時の段階分け
+        if (gaugeCount < 1)//ゲージ未満
         {
-            if (gaugeCount < 1)//ゲージ未満
+            if ((JoyconInput.charge)||(Input.GetKey(KeyCode.G)))//入力検知
+                gaugeCount += Time.deltaTime * upSpeed; //ゲージ上昇
+            if (gaugeCount > 0.6)
             {
-                if ((JoyconInput.charge)||(Input.GetKey(KeyCode.G)))//入力検知
-                    gaugeCount += Time.deltaTime * upSpeed; //ゲージ上昇
-                if (gaugeCount > 0.6)
-                {
-                    gaugeCharge = 2;//2段階ジャンプでき
-                }
-                else if (gaugeCount > 0.2)
-                {
-                    gaugeCharge = 1;//1段階ジャンプでき
-                }
-                else
-                    gaugeCharge = 0;//ジャンプ不可
+                gaugeCharge = 2;//2段階ジャンプでき
+            }
+            else if (gaugeCount > 0.2)
+            {
+                gaugeCharge = 1;//1段階ジャンプでき
             }
             else
-            {
-                gaugeCount = 1;//ゲージ満タン
-                gaugeCharge = 3;//3段階
-            }
-
-
-            if (gaugeCount > 0)//落下の判定
-            {
-                if (gaugeCharge < 3)//ゲージ未満
-                {
-                    gaugeCount -= Time.deltaTime * downSpeed;
-                    if (gaugeCharge == 2)//2段階まで
-                    {
-                        if (gaugeCount < 0.6)
-                            gaugeCount = 0.6f;
-                    }
-                    else if (gaugeCharge == 1)//1段階まで
-                    {
-                        if (gaugeCount < 0.2)
-                            gaugeCount = 0.2f;
-                    }
-                }
-                else//ゲージ満タン
-				{
-                    gaugeCount = 1;
-				}
-
-            }
-            else
-                gaugeCount = 0;//0の時は落下しない
+                gaugeCharge = 0;//ジャンプ不可
         }
+        else
+        {
+            gaugeCount = 1;//ゲージ満タン
+            gaugeCharge = 3;//3段階
+        }
+        if (gaugeCount > 0)//落下の判定
+        {
+            if (gaugeCharge < 3)//ゲージ未満
+            {
+                gaugeCount -= Time.deltaTime * downSpeed;
+                if (gaugeCharge == 2)//2段階まで
+                {
+                    if (gaugeCount < 0.6)
+                        gaugeCount = 0.6f;
+                }
+                else if (gaugeCharge == 1)//1段階まで
+                {
+                    if (gaugeCount < 0.2)
+                        gaugeCount = 0.2f;
+                }
+            }
+            else//ゲージ満タン
+			{
+                gaugeCount = 1;
+			}
+        }
+        else
+            gaugeCount = 0;//0の時は落下しない
         //ゲージの画像表示
         image.fillAmount = gaugeCount;
 
@@ -80,9 +75,9 @@ public class GaugeControl : MonoBehaviour
         {
             if(PlayerController.canJump)//プレイヤーは空中ではない
             {
-                if (Input.GetKey(KeyCode.Space))
+                if ((Input.GetKeyDown(KeyCode.Space)) || (JoyconInput.jump))
                 {
-                    if(gaugeCharge==2)//2段ジャンプ
+                    if(gaugeCharge == 2)//2段ジャンプ
                     {
                         gaugeCount = gaugeCount - 0.6f;
                         PlayerController.isJump2 = true;
@@ -94,10 +89,8 @@ public class GaugeControl : MonoBehaviour
                     }
                 gaugeCharge = 0;//ジャンプ不可
                 }
-
             }
         }
-
         //満タンになる状態
         if(gaugeCharge ==3)
 		{
