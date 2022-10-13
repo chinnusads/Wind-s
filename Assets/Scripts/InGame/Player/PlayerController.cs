@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private float nowJumpTime;
     public static bool canJump;
     public static bool isJump1, isJump2;
+    private bool firstTimeJump;//1回目のジャンプ
     
 
     void Awake()
@@ -20,23 +21,36 @@ public class PlayerController : MonoBehaviour
         jumpSpeed = 0f;
         isJump2 = false;
         isJump1 = false;
+        firstTimeJump = true;
     }
 
     void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.Space)) && (canJump))
+        if ((Input.GetKeyDown(KeyCode.Space))&& (canJump))
         {
-            if (isJump1 || isJump2)
+            if(firstTimeJump)//これは一回目のジャンプとしたら
             {
+                if (isJump1 || isJump2)
+                {
+                    Debug.Log(("isJump1-"));
+                    //canJump = false;
+                    nowJumpTime = 0f;
+                }
+                firstTimeJump = false;
+            }
+            else if (!firstTimeJump)//もう二回目のジャンプとしたら
+            {
+                Debug.Log(("isJump2-1"));
                 canJump = false;
                 nowJumpTime = 0f;
+                
             }
         }
-        if (!canJump)
+        if ((!canJump)||(!firstTimeJump))
         {
             Jump();
         }
-        if (this.gameObject.transform.position.y <= 0f)
+        if (this.gameObject.transform.position.y <= 0f)//着地
         {
             this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, 0f, this.gameObject.transform.position.z);
             canJump = true;
@@ -44,6 +58,7 @@ public class PlayerController : MonoBehaviour
             jumpSpeed = 0f;
             isJump2 = false;
             isJump1 = false;
+            firstTimeJump = true;
         }
     }
 
@@ -51,6 +66,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isJump1)
         {
+            Debug.Log("jump1-1");
             if (nowJumpTime >= jumpTime1)
             {
                 JumpDown(gravity1);
@@ -62,6 +78,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (isJump2)
         {
+            Debug.Log("jump1-2");
             if (nowJumpTime < jumpTime2)
             {
                 JumpUp(jumpStartSpeed2);

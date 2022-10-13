@@ -10,7 +10,7 @@ public class GaugeControl : MonoBehaviour
     public float stopTime;//ジャンプ３まで貯まるとしばらく動けなくなる
     public static int gaugeCharge; //ジャンプの状態。0ジャンプ不可；1一段階ジャンプでき：２二段階ジャンプでき；３貯まりすぎ動けなくなる
     Image image;
-    private int JumpCount;
+    
     
     
     void Start()
