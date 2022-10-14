@@ -40,8 +40,6 @@ public class PlayerColliderTallController : MonoBehaviour
             getavoided = true;
             hasEnemy = false;
         }
-
-
     }
 
     private void OnTriggerEnter2D(Collider2D col)
