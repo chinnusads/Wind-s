@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private float nowJumpTime;
     public static bool canJump;
     public static bool isJump1, isJump2;
+    public static int jumpState;// 0:on the ground; 1:first time jump; 2:second time jump;
 
 
     void Awake()
@@ -20,30 +21,64 @@ public class PlayerController : MonoBehaviour
         jumpSpeed = 0f;
         isJump2 = false;
         isJump1 = false;
+        jumpState = 0;
     }
 
     void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.Space)) && (canJump))
-        {
-            if (isJump1 || isJump2)
-            {
-                canJump = false;
-                nowJumpTime = 0f;
-            }
-        }
-        if (!canJump)
+        JumpInput();
+        if (jumpState > 0)
         {
             Jump();
         }
         if (this.gameObject.transform.position.y <= 0f)
         {
             this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, 0f, this.gameObject.transform.position.z);
-            canJump = true;
+            jumpState = 0;
             nowJumpTime = 0f;
             jumpSpeed = 0f;
             isJump2 = false;
             isJump1 = false;
+        }
+    }
+
+    void JumpInput()
+    {
+        if (jumpState == 0)
+        {
+            if ((Input.GetKeyDown(KeyCode.Space) || (JoyconInput.jump)) && (GaugeControl.gaugeCharge > 0) && (GaugeControl.gaugeCharge < 3))
+            {
+                jumpState = 1;
+                if (GaugeControl.gaugeCharge == 1)
+                {
+                    isJump1 = true;
+                    isJump2 = false;
+                    GaugeControl.gaugeCount -= 0.2f;
+                }
+                if (GaugeControl.gaugeCharge == 2)
+                {
+                    isJump2 = true;
+                    isJump1 = false;
+                    GaugeControl.gaugeCount -= 0.6f;
+                }
+                nowJumpTime = 0f;
+
+            }
+        }
+        else if (jumpState == 1)
+        {
+            if ((Input.GetKeyDown(KeyCode.Space) || (JoyconInput.jump)) && (GaugeControl.gaugeCharge == 1))
+            {
+                jumpState = 2;
+                isJump1 = true;
+                isJump2 = false;
+                nowJumpTime = 0f;
+                GaugeControl.gaugeCount -= 0.2f;
+            }
+        }
+        else if (jumpState == 2)
+        {
+
         }
     }
 

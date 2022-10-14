@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class GaugeControl : MonoBehaviour
 {
-    private float gaugeCount,stopCount;
+    public static float gaugeCount;
+    private float stopCount;
     public float upSpeed, downSpeed;//ゲージ上昇、落下のスピード
     public float stopTime;//ジャンプ３まで貯まるとしばらく動けなくなる
-    private int gaugeCharge; //ジャンプの状態。0ジャンプ不可；1一段階ジャンプでき：２二段階ジャンプでき；３貯まりすぎ動けなくなる
+    public static int gaugeCharge; //ジャンプの状態。0ジャンプ不可；1一段階ジャンプでき：２二段階ジャンプでき；３貯まりすぎ動けなくなる
     Image image;
     
     
@@ -26,7 +27,7 @@ public class GaugeControl : MonoBehaviour
         //ゲージ上昇時の段階分け
         if (gaugeCount < 1)//ゲージ未満
         {
-            if ((JoyconInput.charge)||(Input.GetKey(KeyCode.G)))//入力検知
+            if ((JoyconInput.charge)||(Input.GetKey(KeyCode.G)) && (PlayerController.jumpState == 0))//入力検知
                 gaugeCount += Time.deltaTime * upSpeed; //ゲージ上昇
             if (gaugeCount > 0.6)
             {
@@ -71,7 +72,7 @@ public class GaugeControl : MonoBehaviour
         image.fillAmount = gaugeCount;
 
         //ボタン押したらゲージを消耗する
-        if ((gaugeCharge <3)&&(gaugeCharge>0))//満タンではない状態・ジャンプできる状態⇒ジャンプできる状態
+        /*if ((gaugeCharge <3)&&(gaugeCharge>0))//満タンではない状態・ジャンプできる状態⇒ジャンプできる状態
         {
             if(PlayerController.canJump)//プレイヤーは空中ではない
             {
@@ -90,9 +91,9 @@ public class GaugeControl : MonoBehaviour
                 gaugeCharge = 0;//ジャンプ不可
                 }
             }
-        }
+        }*/
         //満タンになる状態
-        if(gaugeCharge ==3)
+        if (gaugeCharge ==3)
 		{
             stopCount -= Time.deltaTime;//しばらく動けなくなる
              if (stopCount < 0)　//time out
