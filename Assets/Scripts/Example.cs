@@ -185,12 +185,12 @@ public class Example : MonoBehaviour
 
             GUILayout.BeginVertical(GUILayout.Width(480));
             GUILayout.Label(name);
-            GUILayout.Label(key + "£ºshake");
-            GUILayout.Label("your are pushing£º" + button);
-            GUILayout.Label(string.Format("stick£º({0}, {1})", stick[0], stick[1]));
-            GUILayout.Label("gyro£º" + gyro);
-            GUILayout.Label("accel£º" + accel);
-            GUILayout.Label("orientation£º" + orientation);
+            GUILayout.Label(key + "ï¿½ï¿½shake");
+            GUILayout.Label("your are pushingï¿½ï¿½" + button);
+            GUILayout.Label(string.Format("stickï¿½ï¿½({0}, {1})", stick[0], stick[1]));
+            GUILayout.Label("gyroï¿½ï¿½" + gyro);
+            GUILayout.Label("accelï¿½ï¿½" + accel);
+            GUILayout.Label("orientationï¿½ï¿½" + orientation);
             GUILayout.EndVertical();
         }
 

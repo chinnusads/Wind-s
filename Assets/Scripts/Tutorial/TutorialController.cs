@@ -3,24 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class InGameSceneSwitch : MonoBehaviour
+public class TutorialController : MonoBehaviour
 {
     public float lateTime;
-    public  float timer;
+    public float timer;
     public bool isCount;
-    void Start ()
+    void Start()
     {
         isCount = false;
         timer = 0;
     }
-    
-    // Update is called once per frame
-    void Update () 
+
+    void Update()
     {
-        if( Input.GetKeyDown((KeyCode.Space)))
+        if (Input.GetKeyDown((KeyCode.Space)))
         {
             isCount = true;
-            
+
         }
 
         if (isCount)
@@ -29,10 +28,10 @@ public class InGameSceneSwitch : MonoBehaviour
         }
         if (timer > lateTime)
         {
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("InGame");
             timer = 0;
             isCount = false;
-        } 
+        }
 
     }
 }

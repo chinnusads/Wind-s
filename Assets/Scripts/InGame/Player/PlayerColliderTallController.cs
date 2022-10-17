@@ -18,27 +18,27 @@ public class PlayerColliderTallController : MonoBehaviour
 
     void Update()
     {
-        if ((getHitted) && (deleted))//当たった
+        if ((getHitted) && (deleted))
         {
             getHitted = false;
             deleted = false;
             Debug.Log("hitted");
-            ScoreControl.scoreCountDown++; //score計算
+            ScoreControl.scoreCountDown++; 
         }
 
-        if (getavoided)//避けた
+        if (getavoided)
         {
             getavoided = false;
             Debug.Log(("avoided"));
-            ScoreControl.scoreCountUp++;//score計算
+            ScoreControl.scoreCountUp++;
         }
-        if ((hasPlayer) && (hasEnemy))　//当たる判定
+        if ((hasPlayer) && (hasEnemy))
         {
             getHitted = true;
             deleted = false;
             hasEnemy = false;
         }
-        if ((!hasPlayer) && (hasEnemy))//避ける判定
+        if ((!hasPlayer) && (hasEnemy))
         {
             getavoided = true;
             hasEnemy = false;
