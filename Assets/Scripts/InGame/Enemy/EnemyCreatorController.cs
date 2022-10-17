@@ -6,6 +6,8 @@ public class EnemyCreatorController : MonoBehaviour
 {
     public GameObject fireBallPrefab;
     public GameObject doubleFireBallPrefab;
+    public GameObject rockPrefab;
+    public GameObject batPrefab;
     Vector3 position;
     public int enemyTotalNum;
     private int enemyCount;
@@ -17,42 +19,48 @@ public class EnemyCreatorController : MonoBehaviour
 
     void Awake()
     {
-        waitTime = 0f;
+        waitTime = 1.5f;
         enemyCount = 0;
     }
 
     private void FixedUpdate()
     {
-        if (enemyCount < enemyTotalNum)
+        if (waitTime >= 3f)
         {
-            if (waitTime >= 2f)
+            EnemyType();
+            bornPosition();
+            switch (enemyType)
             {
-                EnemyType();
-                bornPosition();
-                switch (enemyType)
-                {
-                    case 1:
-                        {
-                            Instantiate(doubleFireBallPrefab, new Vector3(newEnemyPositionX, newEnemyPositionY, 0), Quaternion.Euler(0, 0, 0));
-                            break;
-                        }
-                    case 2:
-                        {
-                            Instantiate(fireBallPrefab, new Vector3(newEnemyPositionX, newEnemyPositionY, 0), Quaternion.Euler(0, 0, 0));
-                            break;
-                        }
-
-                }
-                enemyCount++;   
-                waitTime = 0;
+                case 1:
+                    {
+                        Instantiate(doubleFireBallPrefab, new Vector3(newEnemyPositionX, newEnemyPositionY + 0.5f, 0), Quaternion.Euler(0, 0, 0));
+                        break;
+                    }
+                case 2:
+                    {
+                        Instantiate(fireBallPrefab, new Vector3(newEnemyPositionX, newEnemyPositionY - 0.3f, 0), Quaternion.Euler(0, 0, 0));
+                        break;
+                    }
+                case 3:
+                    {
+                        Instantiate(rockPrefab, new Vector3(newEnemyPositionX, newEnemyPositionY - 0.3f, 0), Quaternion.Euler(0, 0, 0));
+                        break;
+                    }
+                case 4:
+                    {
+                        Instantiate(batPrefab, new Vector3(newEnemyPositionX, newEnemyPositionY - 0.3f, 0), Quaternion.Euler(0, 0, 0));
+                        break;
+                    }
             }
+            enemyCount++;   
+            waitTime = 0;
         }
         waitTime += Time.fixedDeltaTime;
     }
 
     void EnemyType()
     {
-        enemyType = Random.Range(1, 3);
+        enemyType = Random.Range(1, 5);
     }
 
     void bornPosition()

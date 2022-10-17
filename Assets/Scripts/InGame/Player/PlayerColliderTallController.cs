@@ -87,7 +87,6 @@ public class PlayerColliderTallController : MonoBehaviour
                 {
                     if ((getHitted) && (!deleted))
                     {
-                        Debug.Log("!!!");
                         Destroy(col.gameObject);
                         deleted = true;
                     }

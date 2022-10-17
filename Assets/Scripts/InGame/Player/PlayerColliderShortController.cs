@@ -87,7 +87,6 @@ public class PlayerColliderShortController : MonoBehaviour
                 {
                     if ((getHitted) && (!deleted))
                     {
-                        Debug.Log("!!!");
                         Destroy(col.gameObject);
                         deleted = true;
                     }

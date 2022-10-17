@@ -10,6 +10,7 @@ public class RockController : MonoBehaviour
     public float accel;
     public float lengthX, lengthY;
     private float moveSpeed;
+    private float accelTime;
 
     void Awake()
     {
@@ -17,16 +18,21 @@ public class RockController : MonoBehaviour
         direction = player.transform.position - this.gameObject.transform.position;
         direction = direction.normalized;
         moveSpeed = startSpeed;
+        accelTime = 0f;
     }
 
     private void FixedUpdate()
     {
-        moveSpeed += accel * Time.fixedDeltaTime;
+        if (accelTime > 1f)
+        {
+            moveSpeed += accel * Time.fixedDeltaTime;
+        }
         Move();
         if ((Mathf.Abs(this.gameObject.transform.position.x) >= lengthX) || ((Mathf.Abs(this.gameObject.transform.position.y) >= lengthY)))
         {
             Destroy(this.gameObject);
         }
+        accelTime += Time.fixedDeltaTime;
     }
 
     void Move()
