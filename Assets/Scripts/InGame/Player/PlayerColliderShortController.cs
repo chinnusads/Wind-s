@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerColliderShortController : MonoBehaviour
 {
     [SerializeField]private bool hasPlayer, hasEnemy;
-    public bool getHitted,getavoided;
+    private bool getHitted,getavoided,deleted;
 
     void Awake()
     {
@@ -13,13 +13,15 @@ public class PlayerColliderShortController : MonoBehaviour
         hasPlayer = false;
         getHitted = false;
         getavoided = false;
+        deleted = false;
     }
 
     void Update()
     {
-        if (getHitted)//当たった
+        if ((getHitted) && (deleted))//当たった
         {
             getHitted = false;
+            deleted = false;
             Debug.Log("hitted");
             ScoreControl.scoreCountDown++; //score計算
         }
@@ -33,6 +35,7 @@ public class PlayerColliderShortController : MonoBehaviour
         if ((hasPlayer) && (hasEnemy))　//当たる判定
         {
             getHitted = true;
+            deleted = false;
             hasEnemy = false;
         }
         if ((!hasPlayer) && (hasEnemy))//避ける判定
@@ -40,8 +43,6 @@ public class PlayerColliderShortController : MonoBehaviour
             getavoided = true;
             hasEnemy = false;
         }
-
-        
     }   
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -73,6 +74,23 @@ public class PlayerColliderShortController : MonoBehaviour
             case "Enemy":
                 {
                     hasEnemy = false;
+                    break;
+                }
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D col)
+    {
+        switch (col.gameObject.tag)
+        {
+            case "Enemy":
+                {
+                    if ((getHitted) && (!deleted))
+                    {
+                        Debug.Log("!!!");
+                        Destroy(col.gameObject);
+                        deleted = true;
+                    }
                     break;
                 }
         }
