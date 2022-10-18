@@ -183,15 +183,22 @@ public class PlayerController : MonoBehaviour
         {
             joyconCharge = false;
         }
-        else if ((countingTime > 0.2f) && (jumpState == 0))
+        else
         {
-            if ((Mathf.Abs(distanceY_R) > 0.2f) || (Mathf.Abs(distanceY_L) > 0.2f))
+            if ((countingTime > 0.2f) && (jumpState == 0))
             {
-                joyconCharge = true;
+                if ((Mathf.Abs(distanceY_R) > 0.2f) || (Mathf.Abs(distanceY_L) > 0.2f))
+                {
+                    joyconCharge = true;
+                }
+                else
+                {
+                    joyconCharge = false;
+                }
+                countingTime = 0f;
+                distanceY_L = 0f;
+                distanceY_R = 0f;
             }
-            countingTime = 0f;
-            distanceY_L = 0f;
-            distanceY_R = 0f;
         }
         countingTime += Time.fixedDeltaTime;
     }
