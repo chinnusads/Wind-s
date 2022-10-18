@@ -8,6 +8,7 @@ public class TitleController : MonoBehaviour
     public float lateTime;
     public  float timer;
     public bool isCount;
+
     void Start ()
     {
         isCount = false;
