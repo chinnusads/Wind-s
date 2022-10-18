@@ -7,6 +7,7 @@ public class ScoreControl : MonoBehaviour
     public static float scoreCountUp,scoreCountDown;//加点計算、減点計算
     private Text text;
     public float statusUp,statusDown;//加点倍率、減点倍率
+
     void Start()
     {
         text = GetComponent<Text>();

@@ -9,7 +9,7 @@ public class FireBallController : MonoBehaviour
     public float moveSpeed;
     public float lengthX, lengthY;
 
-    void Awake()
+    void Start()
     {
         player = GameObject.Find("PlayerColliderShort");
         direction = player.transform.position - this.gameObject.transform.position;

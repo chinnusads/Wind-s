@@ -17,9 +17,12 @@ public class Example : MonoBehaviour
     public bool startCounting;
     public float maxGyroX, minGyroX, maxGyroY, minGyroY, maxGyroZ, minGyroZ;
     public float averageGyroX, averageGyroY, averageGyroZ;
+    public float distanceGyroX, distanceGyroY, distanceGyroZ;
+    public float averageDistanceGyro;
     public float maxAccelX, minAccelX, maxAccelY, minAccelY, maxAccelZ, minAccelZ;
     public float averageAccelX, averageAccelY, averageAccelZ;
-    public float distanceX,distanceY,distanceZ;
+    public float averageDistanceAccel;
+    //public float distanceAccelX, distanceAccelY, distanceAccelZ;
     float totalGyroX, totalGyroY, totalGyroZ;
     float totalAccelX, totalAccelY, totalAccelZ;
     float countingTime;
@@ -48,7 +51,6 @@ public class Example : MonoBehaviour
         m_pressedButtonR = null;
 
         if (m_joycons == null || m_joycons.Count <= 0) return;
-
         foreach (var button in m_buttons)
         {
             if (m_joyconL.GetButton(button))
@@ -60,7 +62,6 @@ public class Example : MonoBehaviour
                 m_pressedButtonR = button;
             }
         }
-
         if (Input.GetKeyDown(KeyCode.Z))
         {
             m_joyconL.SetRumble(160, 320, 0.6f, 200);
@@ -69,11 +70,9 @@ public class Example : MonoBehaviour
         {
             m_joyconR.SetRumble(160, 320, 0.6f, 200);
         }
-
         KeyboardControl();
         Reset();
-        Counting();
-        
+        Counting();  
     }
 
     void Counting()
@@ -87,17 +86,83 @@ public class Example : MonoBehaviour
                     var joyconR = joycon;
                     Vector3 gyro = joyconR.GetGyro();
                     Vector3 accel = joyconR.GetAccel();
-                    distanceX += gyro.x * Time.deltaTime;
-                    distanceY += gyro.y * Time.deltaTime;
-                    distanceZ += gyro.z * Time.deltaTime;
+                    distanceGyroX += gyro.x * Time.deltaTime * 10;
+                    distanceGyroY += gyro.y * Time.deltaTime * 10;
+                    distanceGyroZ += gyro.z * Time.deltaTime * 10;
+                    averageDistanceAccel += Mathf.Sqrt(accel.x * accel.x * 100 + accel.y * accel.y * 100 + accel.z * accel.z * 100);
+                    averageDistanceGyro += Mathf.Sqrt(gyro.x * gyro.x * 100 + gyro.y * gyro.y * 100 + gyro.z * gyro.z * 100);
+                    if (gyro.x > maxGyroX)
+                    {
+                        maxGyroX = gyro.x * 10;
+                    }
+                    if (gyro.y > maxGyroY)
+                    {
+                        maxGyroY = gyro.y * 10;
+                    }
+                    if (gyro.z > maxGyroZ)
+                    {
+                        maxGyroZ = gyro.z * 10;
+                    }
+                    if (accel.x > maxAccelX)
+                    {
+                        maxAccelX = accel.x * 10;
+                    }
+                    if (accel.y > maxAccelY)
+                    {
+                        maxAccelY = accel.y * 10;
+                    }
+                    if (accel.z > maxAccelZ)
+                    {
+                        maxAccelZ = accel.z * 10;
+                    }
+                    if (gyro.x < minGyroX)
+                    {
+                        minGyroX = gyro.x * 10;
+                    }
+                    if (gyro.y < minGyroY)
+                    {
+                        minGyroY = gyro.y * 10;
+                    }
+                    if (gyro.z < minGyroZ)
+                    {
+                        minGyroZ = gyro.z * 10;
+                    }
+                    if (accel.x < minAccelX)
+                    {
+                        minAccelX = accel.x * 10;
+                    }
+                    if (accel.y < minAccelY)
+                    {
+                        minAccelY = accel.y * 10;
+                    }
+                    if (accel.z < minAccelZ)
+                    {
+                        minAccelZ = accel.z * 10;
+                    }
+                    totalGyroX += gyro.x * 10;
+                    totalGyroY += gyro.y * 10;
+                    totalGyroZ += gyro.z * 10;
+                    totalAccelX += accel.x * 10;
+                    totalAccelY += accel.y * 10;
+                    totalAccelZ += accel.z * 10;
                 }
             }
-            countingTime += Time.deltaTime;
+            countingTime += 1f;
         }
         else
         {
             if (countingTime != 0f)
             {
+                averageGyroX = totalGyroX / countingTime;
+                averageGyroY = totalGyroY / countingTime;
+                averageGyroZ = totalGyroZ / countingTime;
+                averageAccelX = totalAccelX / countingTime;
+                averageAccelY = totalAccelY / countingTime;
+                averageAccelZ = totalAccelZ / countingTime;
+                averageDistanceAccel = averageDistanceAccel / countingTime;
+                averageDistanceGyro = averageDistanceGyro / countingTime;
+                Debug.Log("averageGyro(" + "x:" + averageGyroX.ToString("f2") + "y:" + averageGyroY.ToString("f2") + "z:" + averageGyroZ.ToString("f2") + ")");
+                Debug.Log("averageAccel(" + "x:" + averageAccelX.ToString("f2") + "y:" + averageAccelY.ToString("f2") + "z:" + averageAccelZ.ToString("f2") + ")");
                 countingTime = 0f;
             }
         }
@@ -141,9 +206,17 @@ public class Example : MonoBehaviour
             totalAccelX = 0f;
             totalAccelY = 0f;
             totalAccelZ = 0f;
-            distanceX = 0f;
-            distanceY = 0f;
-            distanceZ = 0f;
+            distanceGyroX = 0f;
+            distanceGyroY = 0f;
+            distanceGyroZ = 0f;
+            averageAccelX = 0;
+            averageAccelY = 0;
+            averageAccelZ = 0;
+            averageGyroX = 0;
+            averageGyroY = 0;
+            averageGyroZ = 0;
+            averageDistanceAccel = 0;
+            averageDistanceGyro = 0;
         }
     }
 
@@ -185,12 +258,12 @@ public class Example : MonoBehaviour
 
             GUILayout.BeginVertical(GUILayout.Width(480));
             GUILayout.Label(name);
-            GUILayout.Label(key + "��shake");
-            GUILayout.Label("your are pushing��" + button);
-            GUILayout.Label(string.Format("stick��({0}, {1})", stick[0], stick[1]));
-            GUILayout.Label("gyro��" + gyro);
-            GUILayout.Label("accel��" + accel);
-            GUILayout.Label("orientation��" + orientation);
+            GUILayout.Label(key + "shake");
+            GUILayout.Label("your are pushing:" + button);
+            GUILayout.Label(string.Format("stick:({0}, {1})", stick[0], stick[1]));
+            GUILayout.Label("gyro:" + gyro * 10);
+            GUILayout.Label("accel:" + accel * 10);
+            GUILayout.Label("orientation:" + orientation);
             GUILayout.EndVertical();
         }
 
