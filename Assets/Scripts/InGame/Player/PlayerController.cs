@@ -187,7 +187,7 @@ public class PlayerController : MonoBehaviour
         {
             if ((countingTime > 0.2f) && (jumpState == 0))
             {
-                if ((Mathf.Abs(distanceY_R) > 0.2f) || (Mathf.Abs(distanceY_L) > 0.2f))
+                if ((Mathf.Abs(distanceY_R) > 0.2f) || (Mathf.Abs(distanceY_L) > 0.6f))
                 {
                     joyconCharge = true;
                 }
