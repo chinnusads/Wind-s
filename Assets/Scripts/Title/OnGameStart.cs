@@ -8,6 +8,7 @@ public class OnGameStart : MonoBehaviour
 {
     public void GameisStart()
     {
+        
         SceneManager.LoadScene("Tutorial");
     }
 

@@ -451,11 +451,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4083104523579276212, guid: 1b523c566395c5e4caaa4a446a832214, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 104875
+      value: 106200
       objectReference: {fileID: 0}
     - target: {fileID: 6215391168588047137, guid: 1b523c566395c5e4caaa4a446a832214, type: 3}
       propertyPath: m_Name
       value: SystemStatusManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6215391168588047137, guid: 1b523c566395c5e4caaa4a446a832214, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6215391168588047138, guid: 1b523c566395c5e4caaa4a446a832214, type: 3}
       propertyPath: logLevel

@@ -11,6 +11,7 @@ public class OnGameStop : MonoBehaviour
 
     public void GameisStop()
     {
+        
         SceneManager.LoadScene("Title");
     }
     
