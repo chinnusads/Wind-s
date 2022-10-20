@@ -35,9 +35,8 @@ public class PlayerController : MonoBehaviour
     public float jumpStartSpeed1, jumpStartSpeed2;
     public float gravity1, gravity2;
     public float jumpTime1, jumpTime2;//uptime only
-    private float jumpSpeed;
+    public static float jumpSpeed;
     private float nowJumpTime;
-    public static bool canJump;
     public static bool isJump1, isJump2;
     public static int jumpState;// 0:on the ground; 1:first time jump; 2:second time jump;
 
@@ -55,7 +54,6 @@ public class PlayerController : MonoBehaviour
         joyconCharge = false;
         joyconJump = false;
         //jump
-        canJump = true;
         jumpSpeed = 0f;
         isJump2 = false;
         isJump1 = false;
