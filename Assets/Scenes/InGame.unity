@@ -475,11 +475,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 277beaa3ffd0a534d88a0b1b347e71b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationLimit: 0.6
-  riseLimit: 0.4
-  staticAngleL: {x: 360, y: 180, z: 330}
-  staticAngleR: {x: 360, y: 180, z: 210}
-  angleLimit: 15
+  rotationLimit: 3
+  riseLimit: 1.1
+  accelLimit: 2.4
+  pauseChargeTime: 0.6
   jumpStartSpeed1: 3
   jumpStartSpeed2: 4
   gravity1: 2

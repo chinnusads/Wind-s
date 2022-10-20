@@ -81,11 +81,11 @@ public class Example : MonoBehaviour
         {
             foreach (var joycon in m_joycons)
             {
-                if(joycon.isLeft)
+                if(!joycon.isLeft)
                 {
-                    var joyconL = joycon;
-                    Vector3 gyro = joyconL.GetGyro();
-                    Vector3 accel = joyconL.GetAccel();
+                    var joyconR = joycon;
+                    Vector3 gyro = joyconR.GetGyro();
+                    Vector3 accel = joyconR.GetAccel();
                     distanceGyroX += gyro.x * Time.deltaTime * 10;
                     distanceGyroY += gyro.y * Time.deltaTime * 10;
                     distanceGyroZ += gyro.z * Time.deltaTime * 10;
