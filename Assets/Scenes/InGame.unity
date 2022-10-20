@@ -646,8 +646,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 277beaa3ffd0a534d88a0b1b347e71b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceY_R: 0
-  distanceY_L: 0
+  rotationLimit: 3
+  riseLimit: 1.1
+  accelLimit: 2.4
+  pauseChargeTime: 0.6
   jumpStartSpeed1: 3
   jumpStartSpeed2: 4
   gravity1: 2

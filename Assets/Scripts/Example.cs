@@ -254,7 +254,7 @@ public class Example : MonoBehaviour
             var stick = joycon.GetStick();
             var gyro = joycon.GetGyro();
             var accel = joycon.GetAccel();
-            var orientation = joycon.GetVector();
+            var orientation = joycon.GetVector().eulerAngles;
 
             GUILayout.BeginVertical(GUILayout.Width(480));
             GUILayout.Label(name);
