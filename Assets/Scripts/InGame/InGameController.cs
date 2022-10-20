@@ -13,7 +13,7 @@ public class InGameController : MonoBehaviour
     {
         isCount = true;
         timer = 0;
-        lateTime = 62f;
+        lateTime = 63f;
     }
 
     void Update()

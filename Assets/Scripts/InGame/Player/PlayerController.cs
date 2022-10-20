@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UIElements;
+
 public class PlayerController : MonoBehaviour
 {
     //joycon
@@ -34,12 +35,13 @@ public class PlayerController : MonoBehaviour
     public float jumpStartSpeed1, jumpStartSpeed2;
     public float gravity1, gravity2;
     public float jumpTime1, jumpTime2;//uptime only
-    private float jumpSpeed;
+    public static float jumpSpeed;
     private float nowJumpTime;
-    public static bool canJump;
     public static bool isJump1, isJump2;
     public static int jumpState;// 0:on the ground; 1:first time jump; 2:second time jump;
 
+    //anim
+    private Animator anim;
 
     void Start()
     {
@@ -52,7 +54,6 @@ public class PlayerController : MonoBehaviour
         joyconCharge = false;
         joyconJump = false;
         //jump
-        canJump = true;
         jumpSpeed = 0f;
         isJump2 = false;
         isJump1 = false;
@@ -66,6 +67,7 @@ public class PlayerController : MonoBehaviour
         averageGyro_L = 0f;
         averageGyro_R = 0f;
         afterChargeTime = 0f;
+        anim = GetComponent<Animator>();
     }
 
     void FixedUpdate()
@@ -77,7 +79,6 @@ public class PlayerController : MonoBehaviour
             Move();
         }
         GroundReset();
-
     }
 
     void GroundReset()
@@ -90,6 +91,8 @@ public class PlayerController : MonoBehaviour
             jumpSpeed = 0f;
             isJump2 = false;
             isJump1 = false;
+            anim.SetBool("JumpUp", false);
+            anim.SetBool("JumpDown", false);
         }
     }
 
@@ -117,7 +120,7 @@ public class PlayerController : MonoBehaviour
         }
         BottonJump();
         JoyconRotate();
-        JoyconJump();
+        //JoyconJump();
         countingTime += Time.fixedDeltaTime;
     }
 
@@ -155,15 +158,16 @@ public class PlayerController : MonoBehaviour
                 if ((distanceX_L + distanceY_L + distanceZ_L > rotationLimit) || (distanceX_R + distanceY_R + distanceZ_R > rotationLimit))
                 {
                     joyconCharge = true;
-                    afterChargeTime = 0f;
+                    //afterChargeTime = 0f;
                 }
                 else
                 {
                     joyconCharge = false;
                 }
             }
+            JoyconReset();
         }
-        afterChargeTime += Time.fixedDeltaTime;
+        //afterChargeTime += Time.fixedDeltaTime;
     }
     
     void JoyconReset()
@@ -274,6 +278,10 @@ public class PlayerController : MonoBehaviour
                     }
             }
         }
+        if (joyconJump)
+        {
+            joyconCharge = false;
+        }
     }
 
     void Jump()
@@ -297,7 +305,6 @@ public class PlayerController : MonoBehaviour
                     GaugeControl.gaugeCount -= 0.6f;
                 }
                 nowJumpTime = 0f;
-
             }
         }
         else if (jumpState == 1)
@@ -350,6 +357,8 @@ public class PlayerController : MonoBehaviour
     void JumpUp(float jumpStartSpeed)
     {
         jumpSpeed = jumpStartSpeed;
+        anim.SetBool("JumpUp", true);
+        anim.SetBool("JumpDown", false);
     }
 
     void JumpDown(float gravity)
@@ -359,6 +368,8 @@ public class PlayerController : MonoBehaviour
             jumpSpeed = 0f;
         }
         jumpSpeed -= gravity * Time.fixedDeltaTime;
+        anim.SetBool("JumpDown", true);
+        anim.SetBool("JumpUp", false);
     }
 
 }
