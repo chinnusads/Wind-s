@@ -1214,7 +1214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68a5db06f3428e94c8126cb31710f519, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lateTime: 0
+  lateTime: 10
   timer: 0
   isCount: 0
 --- !u!4 &964034072
