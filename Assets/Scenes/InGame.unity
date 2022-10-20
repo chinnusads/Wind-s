@@ -647,7 +647,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationLimit: 3
-  riseLimit: 1.1
+  riseLimit: 1.2
   accelLimit: 2.4
   pauseChargeTime: 0.6
   jumpStartSpeed1: 3
