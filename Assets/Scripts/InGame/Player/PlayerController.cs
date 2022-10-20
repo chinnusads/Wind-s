@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     public float rotationLimit;
     public float riseLimit;
 
-    private float distanceY_R, distanceY_L;
+    private float distanceX_R, distanceY_R, distanceZ_R, distanceX_L, distanceY_L, distanceZ_L;
     private float angleL,angleR;
     public Vector3 staticAngleL,staticAngleR;
     public float angleLimit;
@@ -48,8 +48,6 @@ public class PlayerController : MonoBehaviour
         m_joyconL = m_joycons.Find(c => c.isLeft);
         m_joyconR = m_joycons.Find(c => !c.isLeft);
         countingTime = 0;
-        distanceY_L = 0f;
-        distanceY_R = 0f;
         joyconCharge = false;
         joyconJump = false;
         //jump
@@ -92,12 +90,16 @@ public class PlayerController : MonoBehaviour
         if (m_joyconL != null)
         {
             Vector3 gyro_L = m_joyconL.GetGyro();
+            distanceX_L += gyro_L.x * Time.fixedDeltaTime;
             distanceY_L += gyro_L.y * Time.fixedDeltaTime;
+            distanceZ_L += gyro_L.z * Time.fixedDeltaTime;
         }
         if (m_joyconR != null)
         {
             Vector3 gyro_R = m_joyconR.GetGyro();
+            distanceX_R += gyro_R.y * Time.fixedDeltaTime;
             distanceY_R += gyro_R.y * Time.fixedDeltaTime;
+            distanceZ_R += gyro_R.y * Time.fixedDeltaTime;
         }
         BottonJump();
         JoyconJump();
@@ -120,11 +122,11 @@ public class PlayerController : MonoBehaviour
         }
         if (countingTime > 0.2f) 
         {
-            if ((!overRiseLimitR) && (Mathf.Abs(distanceY_R) > riseLimit))
+            if ((!overRiseLimitR) && ((Mathf.Abs(distanceY_R)+ Mathf.Abs(distanceZ_R) + Mathf.Abs(distanceX_R)) > riseLimit))
             {
                 joyconJump = true;
             }
-            if ((!overRiseLimitL) && (Mathf.Abs(distanceY_L) > riseLimit))
+            if ((!overRiseLimitL) && ((Mathf.Abs(distanceY_L)+ Mathf.Abs(distanceZ_L) + Mathf.Abs(distanceX_L)) > riseLimit))
             {
                 joyconJump = true;
             }
@@ -140,8 +142,12 @@ public class PlayerController : MonoBehaviour
         {
             joyconCharge = false;
             countingTime = 0f;
+            distanceX_L = 0f;
             distanceY_L = 0f;
+            distanceZ_L = 0f;
+            distanceX_R = 0f;
             distanceY_R = 0f;
+            distanceZ_R = 0f;
         }
         else
         {
@@ -159,8 +165,12 @@ public class PlayerController : MonoBehaviour
                     }
                 }
                 countingTime = 0f;
+                distanceX_L = 0f;
                 distanceY_L = 0f;
+                distanceZ_L = 0f;
+                distanceX_R = 0f;
                 distanceY_R = 0f;
+                distanceZ_R = 0f;
             }
         }
     }

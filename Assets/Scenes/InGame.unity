@@ -476,10 +476,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationLimit: 0.6
-  riseLimit: 0.1
+  riseLimit: 0.4
   staticAngleL: {x: 360, y: 180, z: 330}
   staticAngleR: {x: 360, y: 180, z: 210}
-  angleLimit: 20
+  angleLimit: 15
   jumpStartSpeed1: 3
   jumpStartSpeed2: 4
   gravity1: 2
