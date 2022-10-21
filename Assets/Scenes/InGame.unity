@@ -1592,6 +1592,7 @@ GameObject:
   - component: {fileID: 1198488979}
   - component: {fileID: 1198488978}
   - component: {fileID: 1198488981}
+  - component: {fileID: 1198488982}
   m_Layer: 5
   m_Name: Gauge_Death
   m_TagString: Untagged
@@ -1676,6 +1677,18 @@ CanvasRenderer:
   m_GameObject: {fileID: 1198488976}
   m_CullTransparentMesh: 1
 --- !u!114 &1198488981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198488976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66baf90eee71b1d42b4ddf1b51bf0147, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1198488982
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
