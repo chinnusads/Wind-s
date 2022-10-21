@@ -1,0 +1,17 @@
+{
+    "name": "Nissensai2022.Danmaku",
+    "rootNamespace": "",
+    "references": [
+        "GUID:9a571dfb7db552c4498d41c67b1de457",
+        "GUID:854d4dd55b1eac349a02cdb69c56b410"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
