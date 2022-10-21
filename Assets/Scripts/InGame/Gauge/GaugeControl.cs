@@ -20,7 +20,6 @@ public class GaugeControl : MonoBehaviour
         image = GetComponent<Image>();
         stopCount = stopTime;
     }
-
     
     void Update()
     {
@@ -96,7 +95,7 @@ public class GaugeControl : MonoBehaviour
         if (gaugeCharge ==3)
 		{
             stopCount -= Time.deltaTime;//しばらく動けなくなる
-             if (stopCount < 0)　//time out
+            if (stopCount < 0)　//time out
 			{
                 gaugeCharge = 0;
                 gaugeCount = 0;

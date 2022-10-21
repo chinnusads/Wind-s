@@ -40,7 +40,7 @@ public class WindEffectController : MonoBehaviour
         {
             case 0:
                 {
-                    this.gameObject.transform.position = new Vector3(this.transform.position.x, player.transform.position.y + position0, this.transform.position.z);
+                    this.gameObject.transform.position = new Vector3(this.transform.position.x, player.transform.position.y, this.transform.position.z);
                     break;
                 }
             case 1:

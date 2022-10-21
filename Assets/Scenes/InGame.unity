@@ -834,6 +834,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   states: 0.5
+  minPlayerHeight: 0
+  maxPlayerHeight: 6.1
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
