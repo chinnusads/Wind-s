@@ -23,14 +23,8 @@ public class PlayerController : MonoBehaviour
     public float rotationLimit;
     public float riseLimit;
 
-    private float distanceX_R, distanceY_R, distanceZ_R, distanceX_L, distanceY_L, distanceZ_L;
-    private float accelX_L,accelY_L,accelZ_L,accelX_R,accelY_R,accelZ_R;
-    private float averageAccel_L, averageAccel_R;
+    private float distanceX_R, distanceY_R, distanceX_L, distanceY_L;
     public float accelLimit;
-    private float averageGyro_L, averageGyro_R;
-    private float afterChargeTime;
-    public float pauseChargeTime;
-
     //jump
     public float jumpStartSpeed1, jumpStartSpeed2;
     public float gravity1, gravity2;

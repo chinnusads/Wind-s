@@ -7,7 +7,10 @@ public class PlayerColliderShortController : MonoBehaviour
     [SerializeField]private bool hasPlayer, hasEnemy;
     private bool getHitted,getavoided,deleted;
 
-    void Awake()
+    public GameObject attackedUI;
+    public GameObject player;
+
+    void Start()
     {
         hasEnemy = false;
         hasPlayer = false;
@@ -89,6 +92,12 @@ public class PlayerColliderShortController : MonoBehaviour
                     {
                         Destroy(col.gameObject);
                         deleted = true;
+                        var hasUI = GameObject.Find("PlayerAttacked");
+                        if (hasUI!=null)
+                        {
+                            Destroy(hasUI);
+                        }
+                        Instantiate(attackedUI);
                     }
                     break;
                 }
