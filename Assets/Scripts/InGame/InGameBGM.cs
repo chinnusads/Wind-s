@@ -15,7 +15,7 @@ public class InGameBGM : MonoBehaviour
         BGM = false;
     }
 
-    
+
     void Update()
     {
         if (!BGM)
@@ -26,9 +26,9 @@ public class InGameBGM : MonoBehaviour
                 BGM = true;
             }
         }
-        if(CountDown.isTimeOut)
-		{
+        if (CountDown.isTimeOut)
+        {
             audioSource.Stop();
-		}
+        }
     }
 }

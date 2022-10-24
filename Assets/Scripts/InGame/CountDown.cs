@@ -18,37 +18,37 @@ public class CountDown : MonoBehaviour
         isTimeOut = false;
     }
 
-    
+
     void Update()
     {
         timer += Time.deltaTime;
-        count = 3 - timer; 
-        
+        count = 3 - timer;
 
-        if (count >0.5)
+        if (count > 0.5)
+
         {
             text.text = count.ToString("0");
         }
-        
-        if ((count <=0.5) &&(count >0))
-		{
+
+        if ((count <= 0.5) && (count > 0))
+        {
             text.text = "Start";
             isGameStart = true;
-		}
-        if (count <=0)
-		{
+        }
+        if (count <= 0)
+        {
             text.enabled = false;
             isGameStart = true;
         }
-        if(isTimeOut)
-		{
+        if (isTimeOut)
+        {
             text.enabled = true;
             text.text = "Time Out!";
             timer2 += Time.deltaTime;
-            if(timer2>1)
-			{
+            if (timer2 > 1)
+            {
                 SceneManager.LoadScene("Result");
-			}
+            }
         }
     }
 }
