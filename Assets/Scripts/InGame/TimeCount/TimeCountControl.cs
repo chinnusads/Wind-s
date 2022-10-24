@@ -36,6 +36,9 @@ public class TimeCountControl : MonoBehaviour
             {
                 timer = maxTime; //時間は0以下にしないように
                 isCount = false;
+                CountDown.isGameStart = false;
+                CountDown.isTimeOut = true;
+                Debug.Log("isTimeOut");
             }
             
         }

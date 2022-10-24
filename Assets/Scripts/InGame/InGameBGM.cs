@@ -22,9 +22,13 @@ public class InGameBGM : MonoBehaviour
         {
             if (CountDown.isGameStart)
             {
-                audioSource.PlayOneShot(sound1);
+                audioSource.Play();
                 BGM = true;
             }
         }
+        if(CountDown.isTimeOut)
+		{
+            audioSource.Stop();
+		}
     }
 }
