@@ -8,18 +8,27 @@ public class FireBallController : MonoBehaviour
     Vector3 direction;
     public float moveSpeed;
     public float lengthX, lengthY;
+    private Vector3 pos;
 
     void Start()
     {
         player = GameObject.Find("PlayerColliderShort");
-        direction = player.transform.position - this.gameObject.transform.position;
+        if (this.gameObject.transform.position.x > 0)
+        {
+            pos = new Vector3(this.gameObject.transform.position.x * -1, this.gameObject.transform.position.y, this.gameObject.transform.position.z);
+        }
+        else
+        {
+            pos = this.gameObject.transform.position;
+        }
+        direction = player.transform.position - pos;
         direction = direction.normalized;
     }
 
     private void FixedUpdate()
     {
         Move();
-        if ((Mathf.Abs(this.gameObject.transform.position.x) >= lengthX) || ((Mathf.Abs(this.gameObject.transform.position.y) >= lengthY)))
+        if ((Mathf.Abs(this.gameObject.transform.position.x) > lengthX + 1f) || ((Mathf.Abs(this.gameObject.transform.position.y) > lengthY + 1f)))
         {
             Destroy(this.gameObject);
         }

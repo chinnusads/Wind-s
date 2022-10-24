@@ -11,24 +11,34 @@ public class RockController : MonoBehaviour
     public float lengthX, lengthY;
     private float moveSpeed;
     private float accelTime;
+    public float rotateSpeed;
+    private Vector3 pos;
 
-    void Awake()
+    void Start()
     {
         player = GameObject.Find("PlayerColliderShort");
-        direction = player.transform.position - this.gameObject.transform.position;
+        if (this.gameObject.transform.position.x > 0)
+        {
+            pos = new Vector3(this.gameObject.transform.position.x * -1, this.gameObject.transform.position.y, this.gameObject.transform.position.z);
+        }
+        else
+        {
+            pos = this.gameObject.transform.position;
+        }
+        direction = player.transform.position - pos;
         direction = direction.normalized;
         moveSpeed = startSpeed;
         accelTime = 0f;
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         if (accelTime > 1f)
         {
             moveSpeed += accel * Time.fixedDeltaTime;
         }
         Move();
-        if ((Mathf.Abs(this.gameObject.transform.position.x) >= lengthX) || ((Mathf.Abs(this.gameObject.transform.position.y) >= lengthY)))
+        if ((Mathf.Abs(this.gameObject.transform.position.x) > lengthX + 1f) || ((Mathf.Abs(this.gameObject.transform.position.y) > lengthY + 1f)))
         {
             Destroy(this.gameObject);
         }
@@ -36,7 +46,7 @@ public class RockController : MonoBehaviour
     }
 
     void Move()
-    {
+    {   
         
         this.gameObject.transform.Translate(direction * moveSpeed * Time.fixedDeltaTime);
     }
