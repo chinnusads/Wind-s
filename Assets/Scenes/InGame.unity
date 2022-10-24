@@ -272,6 +272,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasPlayer: 0
   hasEnemy: 0
+  attackedUI: {fileID: 1652852343154126852, guid: f358525a75188f74da00a28ff5ea9dd1, type: 3}
+  player: {fileID: 288798542}
 --- !u!61 &68155923
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -363,7 +365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upSpeed: 0.4
-  downSpeed: 0.05
+  downSpeed: 0.1
   stopTime: 1
 --- !u!114 &133594245
 MonoBehaviour:
@@ -667,10 +669,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 277beaa3ffd0a534d88a0b1b347e71b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationLimit: 2
+  rotationLimit: 1.6
   riseLimit: 1.2
   accelLimit: 2.6
-  pauseChargeTime: 0
   jumpStartSpeed1: 3
   jumpStartSpeed2: 4
   gravity1: 2
@@ -1532,6 +1533,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasPlayer: 0
   hasEnemy: 0
+  attackedUI: {fileID: 1652852343154126852, guid: f358525a75188f74da00a28ff5ea9dd1, type: 3}
+  player: {fileID: 288798542}
 --- !u!61 &1146098077
 BoxCollider2D:
   m_ObjectHideFlags: 0

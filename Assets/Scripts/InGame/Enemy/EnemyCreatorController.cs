@@ -8,24 +8,21 @@ public class EnemyCreatorController : MonoBehaviour
     public GameObject doubleFireBallPrefab;
     public GameObject rockPrefab;
     public GameObject batPrefab;
-    Vector3 position;
     public int enemyTotalNum;
-    private int enemyCount;
     public float intervalTime;
     private float waitTime;
     public  float lengthX, lengthY;
     private float newEnemyPositionX, newEnemyPositionY;
     private int enemyType;
 
-    void Awake()
+    void Start()
     {
-        waitTime = 1.5f;
-        enemyCount = 0;
+        waitTime = intervalTime;
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
-        if (waitTime >= 3f)
+        if (waitTime >= intervalTime)
         {
             EnemyType();
             bornPosition();
@@ -51,8 +48,7 @@ public class EnemyCreatorController : MonoBehaviour
                         Instantiate(batPrefab, new Vector3(newEnemyPositionX, newEnemyPositionY - 0.3f, 0), Quaternion.Euler(0, 0, 0));
                         break;
                     }
-            }
-            enemyCount++;   
+            } 
             waitTime = 0;
         }
         waitTime += Time.fixedDeltaTime;
