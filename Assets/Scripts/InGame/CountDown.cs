@@ -1,0 +1,45 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class CountDown : MonoBehaviour
+{
+    Text text;
+    private float timer, count;
+    public static bool isGameStart;
+    void Start()
+    {
+        text = GetComponent<Text>();
+        count = 3;
+        text.enabled = true;
+        isGameStart = false;
+    }
+
+    
+    void Update()
+    {
+        timer += Time.deltaTime;
+        count = 3 - timer;
+        if (count >0.5)
+        {
+            
+            text.text = count.ToString("0");
+        }
+        
+        if ((count <=0.5) &&(count >0))
+		{
+            text.text = "Start";
+            
+            isGameStart = true;
+            
+		}
+        
+        if (count <=0)
+		{
+            text.enabled = false;
+            isGameStart = true;
+        }
+
+    }
+}

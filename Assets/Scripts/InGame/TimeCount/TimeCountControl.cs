@@ -10,11 +10,14 @@ public class TimeCountControl : MonoBehaviour
     private float timer;//経過時間
     private bool isCount;//時間をカウントすべきかどうか
     private Text text;
+
+    
     void Start()
     {
         timer = 0;
         text = GetComponent<Text>();
         isCount = false;
+        
     }
 
     // Update is called once per frame
@@ -38,9 +41,10 @@ public class TimeCountControl : MonoBehaviour
         }
         
         //カウントダウンすべきフラグ
-        if (Input.GetKeyDown((KeyCode.C)))
+        if (CountDown.isGameStart)
         {
             isCount = true;
+            
         }
         
         
