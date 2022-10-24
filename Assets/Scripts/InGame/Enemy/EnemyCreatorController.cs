@@ -8,7 +8,6 @@ public class EnemyCreatorController : MonoBehaviour
     public GameObject doubleFireBallPrefab;
     public GameObject rockPrefab;
     public GameObject batPrefab;
-    public int enemyTotalNum;
     public float intervalTime;
     private float waitTime;
     public  float lengthX, lengthY;
@@ -62,7 +61,7 @@ public class EnemyCreatorController : MonoBehaviour
     void bornPosition()
     {
         int quadrant;
-        quadrant = Random.Range(1,9);
+        quadrant = Random.Range(1,7);
         switch (quadrant)
         {
             case 1:
@@ -79,35 +78,23 @@ public class EnemyCreatorController : MonoBehaviour
                 }
             case 3:
                 {
-                    newEnemyPositionX = 0;
+                    newEnemyPositionX = -lengthX;
                     newEnemyPositionY = lengthY;
                     break;
                 }
             case 4:
                 {
                     newEnemyPositionX = -lengthX;
-                    newEnemyPositionY = lengthY;
+                    newEnemyPositionY = 0;
                     break;
                 }
             case 5:
                 {
                     newEnemyPositionX = -lengthX;
-                    newEnemyPositionY = 0;
+                    newEnemyPositionY = -lengthY;
                     break;
                 }
             case 6:
-                {
-                    newEnemyPositionX = -lengthX;
-                    newEnemyPositionY = -lengthY;
-                    break;
-                }
-            case 7:
-                {
-                    newEnemyPositionX = 0;
-                    newEnemyPositionY = -lengthY;
-                    break;
-                }
-            case 8:
                 {
                     newEnemyPositionX = lengthX;
                     newEnemyPositionY = -lengthY;
