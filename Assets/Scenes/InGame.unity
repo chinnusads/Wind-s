@@ -667,7 +667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 277beaa3ffd0a534d88a0b1b347e71b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationLimit: 2.6
+  rotationLimit: 2
   riseLimit: 1.2
   accelLimit: 2.6
   pauseChargeTime: 0
