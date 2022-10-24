@@ -69,28 +69,6 @@ public class GaugeControl : MonoBehaviour
             gaugeCount = 0;//0の時は落下しない
         //ゲージの画像表示
         image.fillAmount = gaugeCount;
-
-        //ボタン押したらゲージを消耗する
-        /*if ((gaugeCharge <3)&&(gaugeCharge>0))//満タンではない状態・ジャンプできる状態⇒ジャンプできる状態
-        {
-            if(PlayerController.canJump)//プレイヤーは空中ではない
-            {
-                if ((Input.GetKeyDown(KeyCode.Space)) || (JoyconInput.jump))
-                {
-                    if(gaugeCharge == 2)//2段ジャンプ
-                    {
-                        gaugeCount = gaugeCount - 0.6f;
-                        PlayerController.isJump2 = true;
-                    }
-                    else if (gaugeCharge == 1)//1段ジャンプ
-                    {
-                        gaugeCount =gaugeCount - 0.2f;
-                        PlayerController.isJump1 = true;
-                    }
-                gaugeCharge = 0;//ジャンプ不可
-                }
-            }
-        }*/
         //満タンになる状態
         if (gaugeCharge ==3)
 		{

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2249915338456258385}
   - component: {fileID: 2249915338456258380}
   - component: {fileID: 1402631269698087748}
+  - component: {fileID: 1733910445043084043}
   m_Layer: 0
   m_Name: Rock
   m_TagString: Enemy
@@ -98,7 +99,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.04}
+  m_Offset: {x: 0.0025460124, y: -0.03999999}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -109,7 +110,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.69, y: 0.56}
+  m_Size: {x: 0.6594484, y: 0.56}
   m_EdgeRadius: 0
 --- !u!114 &1402631269698087748
 MonoBehaviour:
@@ -127,3 +128,23 @@ MonoBehaviour:
   accel: 2
   lengthX: 10
   lengthY: 6
+  rotateSpeed: 0
+--- !u!95 &1733910445043084043
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2249915338456258384}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: dbf014d0f99db264e9d2a37c24d481cd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

@@ -23,14 +23,8 @@ public class PlayerController : MonoBehaviour
     public float rotationLimit;
     public float riseLimit;
 
-    private float distanceX_R, distanceY_R, distanceZ_R, distanceX_L, distanceY_L, distanceZ_L;
-    private float accelX_L,accelY_L,accelZ_L,accelX_R,accelY_R,accelZ_R;
-    private float averageAccel_L, averageAccel_R;
+    private float distanceX_R, distanceY_R, distanceX_L, distanceY_L;
     public float accelLimit;
-    private float averageGyro_L, averageGyro_R;
-    private float afterChargeTime;
-    public float pauseChargeTime;
-
     //jump
     public float jumpStartSpeed1, jumpStartSpeed2;
     public float gravity1, gravity2;
@@ -58,15 +52,6 @@ public class PlayerController : MonoBehaviour
         isJump2 = false;
         isJump1 = false;
         jumpState = 0;
-        accelX_L = 10f;
-        accelX_R = 10f;
-        accelY_L = 0f;
-        accelZ_L = 0f;
-        accelY_R = 0f;
-        accelZ_R = 0f;
-        averageGyro_L = 0f;
-        averageGyro_R = 0f;
-        afterChargeTime = 0f;
         anim = GetComponent<Animator>();
     }
 
@@ -103,50 +88,17 @@ public class PlayerController : MonoBehaviour
             Vector3 gyro_L = m_joyconL.GetGyro();
             distanceX_L += Mathf.Abs(gyro_L.x * Time.fixedDeltaTime);
             distanceY_L += Mathf.Abs(gyro_L.y * Time.fixedDeltaTime);
-            distanceZ_L += Mathf.Abs(gyro_L.z * Time.fixedDeltaTime);
-            averageGyro_L += (Mathf.Abs(gyro_L.x) + Mathf.Abs(gyro_L.y) + Mathf.Abs(gyro_L.z)) * Time.fixedDeltaTime;
-            Vector3 acce_L = m_joyconL.GetAccel();
-            averageAccel_L += (Mathf.Abs(acce_L.x - accelX_L) + Mathf.Abs(acce_L.y - accelY_L) + Mathf.Abs(acce_L.z - accelZ_L)) * Time.fixedDeltaTime;
         }
         if (m_joyconR != null)
         {
             Vector3 gyro_R = m_joyconR.GetGyro();
             distanceX_R += Mathf.Abs(gyro_R.x * Time.fixedDeltaTime);
             distanceY_R += Mathf.Abs(gyro_R.y * Time.fixedDeltaTime);
-            distanceZ_R += Mathf.Abs(gyro_R.z * Time.fixedDeltaTime);
-            averageGyro_R+= (Mathf.Abs(gyro_R.x) + Mathf.Abs(gyro_R.y) + Mathf.Abs(gyro_R.z)) * Time.fixedDeltaTime;
-            Vector3 acce_R = m_joyconR.GetAccel();
-            averageAccel_R += (Mathf.Abs(acce_R.x - accelX_R) + Mathf.Abs(acce_R.y - accelY_R) + Mathf.Abs(acce_R.z - accelZ_R)) * Time.fixedDeltaTime;
         }
         BottonJump();
         JoyconRotate();
         //JoyconJump();
         countingTime += Time.fixedDeltaTime;
-    }
-
-    void JoyconJump()
-    {
-        if (countingTime > 0.2f) 
-        {
-            if (afterChargeTime >= pauseChargeTime)
-            {
-                //Debug.Log(averageGyro_R);
-                //Debug.Log(averageAccel_R);
-                if ((averageAccel_L < accelLimit) && (averageGyro_L > riseLimit) && (averageGyro_L < riseLimit + 0.8f))
-                {
-                    joyconJump = true;
-                }
-                if ((averageAccel_R < accelLimit) && (averageGyro_R > riseLimit) && (averageGyro_R < riseLimit + 0.8f))
-                {   
-                    joyconJump = true;
-                }
-            }
-            if (joyconJump)
-            {
-                joyconCharge = false;
-            }
-            JoyconReset();
-        }
     }
 
     void JoyconRotate()
@@ -155,10 +107,9 @@ public class PlayerController : MonoBehaviour
         {
             if (jumpSpeed == 0)
             {
-                if ((distanceX_L + distanceY_L + distanceZ_L > rotationLimit) || (distanceX_R + distanceY_R + distanceZ_R > rotationLimit))
+                if ((distanceX_L + distanceY_L> rotationLimit) || (distanceX_R + distanceY_R > rotationLimit))
                 {
                     joyconCharge = true;
-                    //afterChargeTime = 0f;
                 }
                 else
                 {
@@ -167,7 +118,6 @@ public class PlayerController : MonoBehaviour
             }
             JoyconReset();
         }
-        //afterChargeTime += Time.fixedDeltaTime;
     }
     
     void JoyconReset()
@@ -175,14 +125,8 @@ public class PlayerController : MonoBehaviour
         countingTime = 0f;
         distanceX_L = 0f;
         distanceY_L = 0f;
-        distanceZ_L = 0f;
         distanceX_R = 0f;
         distanceY_R = 0f;
-        distanceZ_R = 0f;
-        averageAccel_L = 0f;
-        averageAccel_R = 0f;
-        averageGyro_L = 0f;
-        averageGyro_R = 0f;
     }
 
     void BottonJump()
@@ -288,7 +232,7 @@ public class PlayerController : MonoBehaviour
     {
         if (jumpState == 0)
         {
-            if ((Input.GetKeyDown(KeyCode.Space) || (joyconJump)) && (GaugeControl.gaugeCharge > 0) && (GaugeControl.gaugeCharge < 3))
+            if ((Input.GetKeyDown(KeyCode.Space) || joyconJump) && (GaugeControl.gaugeCharge > 0) && (GaugeControl.gaugeCharge < 3))
             {
                 jumpState = 1;
                 joyconCharge = false;
@@ -309,7 +253,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (jumpState == 1)
         {
-            if ((Input.GetKeyDown(KeyCode.Space) || (joyconJump)) && (GaugeControl.gaugeCharge == 1))
+            if ((Input.GetKeyDown(KeyCode.Space) || joyconJump) && (GaugeControl.gaugeCharge == 1))
             {
                 joyconCharge = false;
                 jumpState = 2;

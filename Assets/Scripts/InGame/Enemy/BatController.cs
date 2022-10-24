@@ -13,11 +13,20 @@ public class BatController : MonoBehaviour
     [SerializeField]private bool u_turn;
     [SerializeField]private int startQuadrant;
     [SerializeField]private int nowQuadrant;
+    private Vector3 pos;
 
-    void Awake()
+    void Start()
     {
         player = GameObject.Find("PlayerColliderShort");
-        direction = player.transform.position - this.gameObject.transform.position;
+        if (this.gameObject.transform.position.x > 0)
+        {
+            pos = new Vector3(this.gameObject.transform.position.x * -1, this.gameObject.transform.position.y, this.gameObject.transform.position.z);
+        }
+        else
+        {
+            pos = this.gameObject.transform.position;
+        }
+        direction = player.transform.position - pos;
         direction = direction.normalized;
         moveSpeed = startSpeed;
         u_turn = false;
@@ -36,7 +45,7 @@ public class BatController : MonoBehaviour
             SpeedChange();
         }
         Move();
-        if ((Mathf.Abs(this.gameObject.transform.position.x) >= lengthX) || ((Mathf.Abs(this.gameObject.transform.position.y) >= lengthY)))
+        if ((Mathf.Abs(this.gameObject.transform.position.x) > lengthX + 1f) || ((Mathf.Abs(this.gameObject.transform.position.y) > lengthY + 1f)))
         {
             Destroy(this.gameObject);
         }

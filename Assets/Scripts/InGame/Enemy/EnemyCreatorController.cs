@@ -8,24 +8,20 @@ public class EnemyCreatorController : MonoBehaviour
     public GameObject doubleFireBallPrefab;
     public GameObject rockPrefab;
     public GameObject batPrefab;
-    Vector3 position;
-    public int enemyTotalNum;
-    private int enemyCount;
     public float intervalTime;
     private float waitTime;
     public  float lengthX, lengthY;
     private float newEnemyPositionX, newEnemyPositionY;
     private int enemyType;
 
-    void Awake()
+    void Start()
     {
-        waitTime = 1.5f;
-        enemyCount = 0;
+        waitTime = intervalTime;
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
-        if (waitTime >= 3f)
+        if (waitTime >= intervalTime)
         {
             EnemyType();
             bornPosition();
@@ -33,7 +29,7 @@ public class EnemyCreatorController : MonoBehaviour
             {
                 case 1:
                     {
-                        Instantiate(doubleFireBallPrefab, new Vector3(newEnemyPositionX, newEnemyPositionY + 0.5f, 0), Quaternion.Euler(0, 0, 0));
+                        Instantiate(doubleFireBallPrefab, new Vector3(newEnemyPositionX, newEnemyPositionY, 0), Quaternion.Euler(0, 0, 0));
                         break;
                     }
                 case 2:
@@ -51,8 +47,7 @@ public class EnemyCreatorController : MonoBehaviour
                         Instantiate(batPrefab, new Vector3(newEnemyPositionX, newEnemyPositionY - 0.3f, 0), Quaternion.Euler(0, 0, 0));
                         break;
                     }
-            }
-            enemyCount++;   
+            } 
             waitTime = 0;
         }
         waitTime += Time.fixedDeltaTime;
@@ -66,7 +61,7 @@ public class EnemyCreatorController : MonoBehaviour
     void bornPosition()
     {
         int quadrant;
-        quadrant = Random.Range(1,9);
+        quadrant = Random.Range(1,7);
         switch (quadrant)
         {
             case 1:
@@ -83,35 +78,23 @@ public class EnemyCreatorController : MonoBehaviour
                 }
             case 3:
                 {
-                    newEnemyPositionX = 0;
+                    newEnemyPositionX = -lengthX;
                     newEnemyPositionY = lengthY;
                     break;
                 }
             case 4:
                 {
                     newEnemyPositionX = -lengthX;
-                    newEnemyPositionY = lengthY;
+                    newEnemyPositionY = 0;
                     break;
                 }
             case 5:
                 {
                     newEnemyPositionX = -lengthX;
-                    newEnemyPositionY = 0;
+                    newEnemyPositionY = -lengthY;
                     break;
                 }
             case 6:
-                {
-                    newEnemyPositionX = -lengthX;
-                    newEnemyPositionY = -lengthY;
-                    break;
-                }
-            case 7:
-                {
-                    newEnemyPositionX = 0;
-                    newEnemyPositionY = -lengthY;
-                    break;
-                }
-            case 8:
                 {
                     newEnemyPositionX = lengthX;
                     newEnemyPositionY = -lengthY;

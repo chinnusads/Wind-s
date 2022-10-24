@@ -38,20 +38,12 @@ public class TimeCountControl : MonoBehaviour
                 isCount = false;
                 CountDown.isTimeOut = true;
             }
-            
         }
-        
         //カウントダウンすべきフラグ
         if (CountDown.isGameStart)
         {
             isCount = true;
-            
         }
-        
-        
-        
-        
-        
         
     }
 }

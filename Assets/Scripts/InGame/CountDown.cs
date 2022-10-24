@@ -15,6 +15,7 @@ public class CountDown : MonoBehaviour
         count = 3;
         text.enabled = true;
         isGameStart = false;
+        isTimeOut = false;
     }
 
 
@@ -23,8 +24,8 @@ public class CountDown : MonoBehaviour
         timer += Time.deltaTime;
         count = 3 - timer;
 
-
         if (count > 0.5)
+
         {
             text.text = count.ToString("0");
         }
