@@ -29,7 +29,7 @@ public class EnemyCreatorController : MonoBehaviour
             {
                 case 1:
                     {
-                        Instantiate(doubleFireBallPrefab, new Vector3(newEnemyPositionX, newEnemyPositionY + 0.5f, 0), Quaternion.Euler(0, 0, 0));
+                        Instantiate(doubleFireBallPrefab, new Vector3(newEnemyPositionX, newEnemyPositionY, 0), Quaternion.Euler(0, 0, 0));
                         break;
                     }
                 case 2:
