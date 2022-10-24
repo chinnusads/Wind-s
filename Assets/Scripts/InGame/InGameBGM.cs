@@ -15,16 +15,20 @@ public class InGameBGM : MonoBehaviour
         BGM = false;
     }
 
-    
+
     void Update()
     {
         if (!BGM)
         {
             if (CountDown.isGameStart)
             {
-                audioSource.PlayOneShot(sound1);
+                audioSource.Play();
                 BGM = true;
             }
+        }
+        if (CountDown.isTimeOut)
+        {
+            audioSource.Stop();
         }
     }
 }

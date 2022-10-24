@@ -36,6 +36,7 @@ public class TimeCountControl : MonoBehaviour
             {
                 timer = maxTime; //時間は0以下にしないように
                 isCount = false;
+                CountDown.isTimeOut = true;
             }
             
         }
