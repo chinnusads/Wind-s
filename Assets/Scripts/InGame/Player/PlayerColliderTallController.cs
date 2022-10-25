@@ -9,6 +9,7 @@ public class PlayerColliderTallController : MonoBehaviour
 
     public GameObject attackedUI;
     public GameObject player;
+    public GameObject ExpPlus;
 
     void Start()
     {
@@ -26,6 +27,7 @@ public class PlayerColliderTallController : MonoBehaviour
             getHitted = false;
             deleted = false;
             Debug.Log("hitted");
+            //Instantiate(ExpPlus, this.transform.position, this.transform.rotation);
             ScoreControl.scoreCountDown++; 
         }
 
@@ -33,6 +35,7 @@ public class PlayerColliderTallController : MonoBehaviour
         {
             getavoided = false;
             Debug.Log(("avoided"));
+            Instantiate(ExpPlus, new Vector3(PlayerInfo.playerX, PlayerInfo.playerY, 0f), this.transform.rotation);
             ScoreControl.scoreCountUp++;
         }
         if ((hasPlayer) && (hasEnemy))
