@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerInfo : MonoBehaviour
 {
-    public static float playerY;//プレイヤーのy軸座標を取得する⇒カメラの運動につながる
+    public static float playerX,playerY;//プレイヤーのy軸座標を取得する⇒カメラの運動につながる
     void Start()
     {
         
@@ -14,5 +14,7 @@ public class PlayerInfo : MonoBehaviour
     void Update()
     {
         playerY = this.transform.position.y;
+        playerX = this.transform.position.x;
+
     }
 }
