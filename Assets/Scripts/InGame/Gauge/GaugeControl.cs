@@ -23,64 +23,66 @@ public class GaugeControl : MonoBehaviour
     
     void Update()
     {
-        //ゲージ上昇時の段階分け
-        if (gaugeCount < 1)//ゲージ未満
+        if((CountDown.isGameStart) && (!CountDown.isTimeOut))
         {
-            if (((PlayerController.joyconCharge)||(Input.GetKey(KeyCode.G))) && (PlayerController.jumpState == 0))//入力検知
-                gaugeCount += Time.deltaTime * upSpeed; //ゲージ上昇
-            if (gaugeCount > 0.6)
+            //ゲージ上昇時の段階分け
+            if (gaugeCount < 1)//ゲージ未満
             {
-                gaugeCharge = 2;//2段階ジャンプでき
-            }
-            else if (gaugeCount > 0.2)
-            {
-                gaugeCharge = 1;//1段階ジャンプでき
+                if (((PlayerController.joyconCharge) || (Input.GetKey(KeyCode.G))) && (PlayerController.jumpState == 0))//入力検知
+                    gaugeCount += Time.deltaTime * upSpeed; //ゲージ上昇
+                if (gaugeCount > 0.6)
+                {
+                    gaugeCharge = 2;//2段階ジャンプでき
+                }
+                else if (gaugeCount > 0.2)
+                {
+                    gaugeCharge = 1;//1段階ジャンプでき
+                }
+                else
+                    gaugeCharge = 0;//ジャンプ不可
             }
             else
-                gaugeCharge = 0;//ジャンプ不可
-        }
-        else
-        {
-            gaugeCount = 1;//ゲージ満タン
-            gaugeCharge = 3;//3段階
-        }
-        if (gaugeCount > 0)//落下の判定
-        {
-            if (gaugeCharge < 3)//ゲージ未満
             {
-                gaugeCount -= Time.deltaTime * downSpeed;
-                if (gaugeCharge == 2)//2段階まで
+                gaugeCount = 1;//ゲージ満タン
+                gaugeCharge = 3;//3段階
+            }
+            if (gaugeCount > 0)//落下の判定
+            {
+                if (gaugeCharge < 3)//ゲージ未満
                 {
-                    if (gaugeCount < 0.6)
-                        gaugeCount = 0.6f;
+                    gaugeCount -= Time.deltaTime * downSpeed;
+                    if (gaugeCharge == 2)//2段階まで
+                    {
+                        if (gaugeCount < 0.6)
+                            gaugeCount = 0.6f;
+                    }
+                    else if (gaugeCharge == 1)//1段階まで
+                    {
+                        if (gaugeCount < 0.2)
+                            gaugeCount = 0.2f;
+                    }
                 }
-                else if (gaugeCharge == 1)//1段階まで
+                else//ゲージ満タン
                 {
-                    if (gaugeCount < 0.2)
-                        gaugeCount = 0.2f;
+                    gaugeCount = 1;
                 }
             }
-            else//ゲージ満タン
-			{
-                gaugeCount = 1;
-			}
+            else
+                gaugeCount = 0;//0の時は落下しない
+                               //ゲージの画像表示
+            image.fillAmount = gaugeCount;
+            //満タンになる状態
+            if (gaugeCharge == 3)
+            {
+                stopCount -= Time.deltaTime;//しばらく動けなくなる
+                if (stopCount < 0) //time out
+                {
+                    gaugeCharge = 0;
+                    gaugeCount = 0;
+                    stopCount = stopTime;
+                }
+            }
+            //改善可能の点：ゲージは一瞬で落ちるではなく、徐々に落ちで行く。
         }
-        else
-            gaugeCount = 0;//0の時は落下しない
-        //ゲージの画像表示
-        image.fillAmount = gaugeCount;
-        //満タンになる状態
-        if (gaugeCharge ==3)
-		{
-            stopCount -= Time.deltaTime;//しばらく動けなくなる
-            if (stopCount < 0)　//time out
-			{
-                gaugeCharge = 0;
-                gaugeCount = 0;
-                stopCount = stopTime;
-            }
-		}
-        //改善可能の点：ゲージは一瞬で落ちるではなく、徐々に落ちで行く。
-
     }
 }

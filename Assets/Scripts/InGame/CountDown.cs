@@ -33,7 +33,6 @@ public class CountDown : MonoBehaviour
         if ((count <= 0.5) && (count > 0))
         {
             text.text = "Start";
-            isGameStart = true;
         }
         if (count <= 0)
         {
