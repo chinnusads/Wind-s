@@ -57,13 +57,16 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        JoyconInput();
-        Jump();
-        if (jumpState > 0)
+        if ((CountDown.isGameStart) && (!CountDown.isTimeOut))
         {
-            Move();
+            JoyconInput();
+            Jump();
+            if (jumpState > 0)
+            {
+                Move();
+            }
+            GroundReset();
         }
-        GroundReset();
     }
 
     void GroundReset()

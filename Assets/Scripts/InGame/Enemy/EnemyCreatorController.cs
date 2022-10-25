@@ -21,36 +21,40 @@ public class EnemyCreatorController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (waitTime >= intervalTime)
+        if ((CountDown.isGameStart) && (!CountDown.isTimeOut))
         {
-            EnemyType();
-            bornPosition();
-            switch (enemyType)
+            Debug.Log("!!!");
+            if (waitTime >= intervalTime)
             {
-                case 1:
-                    {
-                        Instantiate(doubleFireBallPrefab, new Vector3(newEnemyPositionX, newEnemyPositionY, 0), Quaternion.Euler(0, 0, 0));
-                        break;
-                    }
-                case 2:
-                    {
-                        Instantiate(fireBallPrefab, new Vector3(newEnemyPositionX, newEnemyPositionY - 0.3f, 0), Quaternion.Euler(0, 0, 0));
-                        break;
-                    }
-                case 3:
-                    {
-                        Instantiate(rockPrefab, new Vector3(newEnemyPositionX, newEnemyPositionY - 0.3f, 0), Quaternion.Euler(0, 0, 0));
-                        break;
-                    }
-                case 4:
-                    {
-                        Instantiate(batPrefab, new Vector3(newEnemyPositionX, newEnemyPositionY - 0.3f, 0), Quaternion.Euler(0, 0, 0));
-                        break;
-                    }
-            } 
-            waitTime = 0;
+                EnemyType();
+                bornPosition();
+                switch (enemyType)
+                {
+                    case 1:
+                        {
+                            Instantiate(doubleFireBallPrefab, new Vector3(newEnemyPositionX, newEnemyPositionY, 0), Quaternion.Euler(0, 0, 0));
+                            break;
+                        }
+                    case 2:
+                        {
+                            Instantiate(fireBallPrefab, new Vector3(newEnemyPositionX, newEnemyPositionY - 0.3f, 0), Quaternion.Euler(0, 0, 0));
+                            break;
+                        }
+                    case 3:
+                        {
+                            Instantiate(rockPrefab, new Vector3(newEnemyPositionX, newEnemyPositionY - 0.3f, 0), Quaternion.Euler(0, 0, 0));
+                            break;
+                        }
+                    case 4:
+                        {
+                            Instantiate(batPrefab, new Vector3(newEnemyPositionX, newEnemyPositionY - 0.3f, 0), Quaternion.Euler(0, 0, 0));
+                            break;
+                        }
+                }
+                waitTime = 0;
+            }
+            waitTime += Time.fixedDeltaTime;
         }
-        waitTime += Time.fixedDeltaTime;
     }
 
     void EnemyType()

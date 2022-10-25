@@ -25,12 +25,15 @@ public class FireBallController : MonoBehaviour
         direction = direction.normalized;
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
-        Move();
-        if ((Mathf.Abs(this.gameObject.transform.position.x) > lengthX + 1f) || ((Mathf.Abs(this.gameObject.transform.position.y) > lengthY + 1f)))
+        if ((CountDown.isGameStart) && (!CountDown.isTimeOut))
         {
-            Destroy(this.gameObject);
+            Move();
+            if ((Mathf.Abs(this.gameObject.transform.position.x) > lengthX + 1f) || ((Mathf.Abs(this.gameObject.transform.position.y) > lengthY + 1f)))
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 

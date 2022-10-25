@@ -33,16 +33,19 @@ public class RockController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (accelTime > 1f)
+        if ((CountDown.isGameStart) && (!CountDown.isTimeOut))
         {
-            moveSpeed += accel * Time.fixedDeltaTime;
+            if (accelTime > 1f)
+            {
+                moveSpeed += accel * Time.fixedDeltaTime;
+            }
+            Move();
+            if ((Mathf.Abs(this.gameObject.transform.position.x) > lengthX + 1f) || ((Mathf.Abs(this.gameObject.transform.position.y) > lengthY + 1f)))
+            {
+                Destroy(this.gameObject);
+            }
+            accelTime += Time.fixedDeltaTime;
         }
-        Move();
-        if ((Mathf.Abs(this.gameObject.transform.position.x) > lengthX + 1f) || ((Mathf.Abs(this.gameObject.transform.position.y) > lengthY + 1f)))
-        {
-            Destroy(this.gameObject);
-        }
-        accelTime += Time.fixedDeltaTime;
     }
 
     void Move()

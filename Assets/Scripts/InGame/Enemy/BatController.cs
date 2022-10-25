@@ -33,21 +33,24 @@ public class BatController : MonoBehaviour
         startQuadrant = Quadrant();
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
-        nowQuadrant = Quadrant();
-        if ((nowQuadrant + 2 == startQuadrant) || (nowQuadrant - 2 == startQuadrant))
+        if ((CountDown.isGameStart) && (!CountDown.isTimeOut))
         {
-            u_turn = true;
-        }
-        if (u_turn)
-        {
-            SpeedChange();
-        }
-        Move();
-        if ((Mathf.Abs(this.gameObject.transform.position.x) > lengthX + 1f) || ((Mathf.Abs(this.gameObject.transform.position.y) > lengthY + 1f)))
-        {
-            Destroy(this.gameObject);
+            nowQuadrant = Quadrant();
+            if ((nowQuadrant + 2 == startQuadrant) || (nowQuadrant - 2 == startQuadrant))
+            {
+                u_turn = true;
+            }
+            if (u_turn)
+            {
+                SpeedChange();
+            }
+            Move();
+            if ((Mathf.Abs(this.gameObject.transform.position.x) > lengthX + 1f) || ((Mathf.Abs(this.gameObject.transform.position.y) > lengthY + 1f)))
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 
