@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Nissensai2022.Runtime;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SendRank : MonoBehaviour
 {
@@ -15,28 +16,62 @@ public class SendRank : MonoBehaviour
     private Joycon m_joyconL;
     private Joycon m_joyconR;
 
-    public static bool jump;
+    public static bool buttonInput;
+    private bool _resultSent = false;
 
-    private ResultRank rank;
+    [SerializeField]private ResultRank rank;
+
+    private float timer;
+    public float maxTime;//ランク文字出現のタイミング
+    private Text text;
+
     void Start()
     {
-        rank = ResultRank.A;
+        text = GetComponent<Text>();
+        text.enabled = false;
 
         m_joycons = JoyconManager.Instance.j;
         if (m_joycons == null || m_joycons.Count <= 0)
             return;
         m_joyconL = m_joycons.Find(c => c.isLeft);
         m_joyconR = m_joycons.Find(c => !c.isLeft);
-        jump = false;
+        buttonInput = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (ScoreControl.TotalScore > 450)
+        {
+            rank = ResultRank.A;
+        }
+        else if (ScoreControl.TotalScore > 300)
+        {
+            rank = ResultRank.B;
+        }
+        else if (ScoreControl.TotalScore > 150)
+        {
+            rank = ResultRank.C;
+        }
+        else if (ScoreControl.TotalScore > 0)
+        {
+            rank = ResultRank.D;
+        }
+        else
+        {
+            rank = ResultRank.E;
+        }
+        text.text = rank.ToString();
+        timer += Time.deltaTime;
+        if (timer > maxTime)
+        {
+            text.enabled = true;
+        }
         JoyconInput();
-        if (jump)
+        if (buttonInput&&!_resultSent)
         {
             Nissensai.SendResult(rank);
+            _resultSent = true;
         }
     }
 
@@ -67,32 +102,32 @@ public class SendRank : MonoBehaviour
             {
                 case 0:
                     {
-                        jump = true;
+                        buttonInput = true;
                         break;
                     }
                 case 1:
                     {
-                        jump = true;
+                        buttonInput = true;
                         break;
                     }
                 case 2:
                     {
-                        jump = true;
+                        buttonInput = true;
                         break;
                     }
                 case 3:
                     {
-                        jump = true;
+                        buttonInput = true;
                         break;
                     }
                 case 11:
                     {
-                        jump = true;
+                        buttonInput = true;
                         break;
                     }
                 case 12:
                     {
-                        jump = true;
+                        buttonInput = true;
                         break;
                     }
             }
@@ -103,32 +138,32 @@ public class SendRank : MonoBehaviour
             {
                 case 0:
                     {
-                        jump = true;
+                        buttonInput = true;
                         break;
                     }
                 case 1:
                     {
-                        jump = true;
+                        buttonInput = true;
                         break;
                     }
                 case 2:
                     {
-                        jump = true;
+                        buttonInput = true;
                         break;
                     }
                 case 3:
                     {
-                        jump = true;
+                        buttonInput = true;
                         break;
                     }
                 case 11:
                     {
-                        jump = true;
+                        buttonInput = true;
                         break;
                     }
                 case 12:
                     {
-                        jump = true;
+                        buttonInput = true;
                         break;
                     }
             }
