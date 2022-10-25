@@ -41,15 +41,15 @@ public class SendRank : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ScoreControl.TotalScore > 450)
+        if (ScoreControl.TotalScore > 300)
         {
             rank = ResultRank.A;
         }
-        else if (ScoreControl.TotalScore > 300)
+        else if (ScoreControl.TotalScore > 200)
         {
             rank = ResultRank.B;
         }
-        else if (ScoreControl.TotalScore > 150)
+        else if (ScoreControl.TotalScore > 100)
         {
             rank = ResultRank.C;
         }

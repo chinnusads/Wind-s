@@ -1203,7 +1203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0d11d8323c3f7c488f9f2fe174ccc32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTime: 60
+  maxTime: 10
 --- !u!114 &648941889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1961,7 +1961,7 @@ MonoBehaviour:
   doubleFireBallPrefab: {fileID: 2177987818982364081, guid: c24b58a4edebfc348a9f6b43c28e3d05, type: 3}
   rockPrefab: {fileID: 3758988162055476591, guid: d5db537082da71746a76fd50f0b236e2, type: 3}
   batPrefab: {fileID: 2101076435824364233, guid: ef2a3815b81a9154ca6165679d3633e2, type: 3}
-  intervalTime: 2
+  intervalTime: 3
   lengthX: 10
   lengthY: 6
 --- !u!1 &1594880622

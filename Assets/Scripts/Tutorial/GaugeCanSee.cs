@@ -15,7 +15,7 @@ public class GaugeCanSee : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if((PlayerController.joyconCharge) || (Input.GetKey(KeyCode.G)))
+        if((TutorialController.joyconCharge) || (Input.GetKey(KeyCode.G)))
 		{
             image.enabled = true;
 		}
