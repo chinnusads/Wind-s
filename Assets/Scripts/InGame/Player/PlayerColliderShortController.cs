@@ -30,7 +30,6 @@ public class PlayerColliderShortController : MonoBehaviour
             //Instantiate(ExpPlus, this.transform.position, this.transform.rotation);
             ScoreControl.scoreCountDown++; //score計算
         }
-
         if (getavoided)//避けた
         {
             getavoided = false;
