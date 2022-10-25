@@ -23,7 +23,6 @@ public class EnemyCreatorController : MonoBehaviour
     {
         if ((CountDown.isGameStart) && (!CountDown.isTimeOut))
         {
-            Debug.Log("!!!");
             if (waitTime >= intervalTime)
             {
                 EnemyType();
