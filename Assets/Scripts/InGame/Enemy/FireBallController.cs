@@ -10,6 +10,8 @@ public class FireBallController : MonoBehaviour
     public float lengthX, lengthY;
     private Vector3 pos;
 
+    public AudioSource fireBallSE;
+
     void Start()
     {
         player = GameObject.Find("PlayerColliderShort");
@@ -23,6 +25,7 @@ public class FireBallController : MonoBehaviour
         }
         direction = player.transform.position - pos;
         direction = direction.normalized;
+        fireBallSE.Play();
     }
 
     void FixedUpdate()

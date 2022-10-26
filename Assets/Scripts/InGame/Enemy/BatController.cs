@@ -57,7 +57,7 @@ public class BatController : MonoBehaviour
             }
         }
         time = time + Time.fixedDeltaTime;
-        if (time > 1f)
+        if (time > 1.5f)
         {
             batSE.Stop();
         }
