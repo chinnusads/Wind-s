@@ -10,6 +10,8 @@ public class DoubleFireBallController : MonoBehaviour
     public float lengthX, lengthY;
     private Vector3 pos;
 
+    public AudioSource doubleFireBallSE;
+
     void Start()
     {
         player = GameObject.Find("PlayerColliderTall");
@@ -24,6 +26,7 @@ public class DoubleFireBallController : MonoBehaviour
         }
         direction = player_pos - pos;
         direction = direction.normalized;
+        doubleFireBallSE.Play();
     }
 
     void FixedUpdate()

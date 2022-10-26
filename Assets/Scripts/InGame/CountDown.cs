@@ -10,7 +10,8 @@ public class CountDown : MonoBehaviour
     private float timer, count,timer2;
     public static bool isGameStart,isTimeOut;
     public AudioSource sceneChangeSE;
-    public AudioSource countDownSE;
+    public AudioSource countDownSE, startSE, timeOutSE;
+    private int SETimes;
 
     void Start()
     {
@@ -19,6 +20,8 @@ public class CountDown : MonoBehaviour
         text.enabled = true;
         isGameStart = false;
         isTimeOut = false;
+        SETimes = 1;
+        countDownSE.Play();
     }
 
 
@@ -26,16 +29,24 @@ public class CountDown : MonoBehaviour
     {
         timer += Time.deltaTime;
         count = 3 - timer;
-
+        
+        if ((count <=2) && (SETimes == 1))
+        {
+            countDownSE.Play();
+            SETimes++;
+        }
+        if ((count <= 1) && (SETimes == 2))
+        {
+            countDownSE.Play();
+            SETimes++;
+        }
         if (count > 0.5)
-
         {
             text.text = count.ToString("0");
         }
-
         if ((count <= 0.5) && (count > 0))
         {
-            countDownSE.Play();
+            startSE.Play();
             text.text = "Start";
         }
         if (count <= 0)
@@ -45,7 +56,7 @@ public class CountDown : MonoBehaviour
         }
         if (isTimeOut)
         {
-            countDownSE.Play();
+            timeOutSE.Play();
             text.enabled = true;
             text.text = "Time Out!";
             timer2 += Time.deltaTime;
