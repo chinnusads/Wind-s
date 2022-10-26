@@ -27,6 +27,8 @@ public class TutorialController : MonoBehaviour
     //anim
     private Animator anim;
 
+    public AudioSource chargeSE;
+
     void Start()
     {
         //joycon
@@ -79,6 +81,17 @@ public class TutorialController : MonoBehaviour
                 joyconCharge = false;
             }
             JoyconReset();
+            if (joyconCharge)
+            {
+                if (!chargeSE.isPlaying)
+                {
+                    chargeSE.Play();
+                }
+            }
+            else
+            {
+                chargeSE.Stop();
+            }
         }
     }
 

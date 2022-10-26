@@ -37,6 +37,9 @@ public class PlayerController : MonoBehaviour
     //anim
     private Animator anim;
 
+    //se
+    public AudioSource jump1SE, jump2SE, chargeSE;
+
     void Start()
     {
         //joycon
@@ -100,7 +103,17 @@ public class PlayerController : MonoBehaviour
         }
         BottonJump();
         JoyconRotate();
-        //JoyconJump();
+        if (joyconCharge)
+        {
+            if (!chargeSE.isPlaying)
+            {
+                chargeSE.Play();
+            }
+        }
+        else
+        {
+            chargeSE.Stop();
+        }
         countingTime += Time.fixedDeltaTime;
     }
 
@@ -244,12 +257,14 @@ public class PlayerController : MonoBehaviour
                     isJump1 = true;
                     isJump2 = false;
                     GaugeControl.gaugeCount -= 0.2f;
+                    jump1SE.Play();
                 }
                 if (GaugeControl.gaugeCharge == 2)
                 {
                     isJump2 = true;
                     isJump1 = false;
                     GaugeControl.gaugeCount -= 0.6f;
+                    jump2SE.Play();
                 }
                 nowJumpTime = 0f;
             }
@@ -264,6 +279,7 @@ public class PlayerController : MonoBehaviour
                 isJump2 = false;
                 nowJumpTime = 0f;
                 GaugeControl.gaugeCount -= 0.2f;
+                jump1SE.Play();
             }
         }
         else if (jumpState == 2)

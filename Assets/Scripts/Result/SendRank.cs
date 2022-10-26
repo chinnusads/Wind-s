@@ -25,6 +25,9 @@ public class SendRank : MonoBehaviour
     public float maxTime;//ランク文字出現のタイミング
     private Text text;
 
+    public AudioSource rankSE;
+    public AudioSource sceneChangeSE;
+
     void Start()
     {
         text = GetComponent<Text>();
@@ -63,13 +66,15 @@ public class SendRank : MonoBehaviour
         }
         text.text = rank.ToString();
         timer += Time.deltaTime;
-        if (timer > maxTime)
+        if ((timer > maxTime) && (!text.enabled))
         {
+            rankSE.Play();
             text.enabled = true;
         }
         JoyconInput();
         if (buttonInput&&!_resultSent)
         {
+            sceneChangeSE.Play();
             Nissensai.SendResult(rank);
             _resultSent = true;
         }

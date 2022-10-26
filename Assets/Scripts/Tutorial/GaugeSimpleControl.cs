@@ -11,7 +11,9 @@ public class GaugeSimpleControl : MonoBehaviour
 
     public float upSpeed;
 
-	void Start()
+    public AudioSource sceneChangeSE;
+
+    void Start()
     {
         image = GetComponent<Image>();
         image.enabled = false;
@@ -31,6 +33,7 @@ public class GaugeSimpleControl : MonoBehaviour
 		{
             if (TutorialController.joyconBottun)
             {
+                sceneChangeSE.Play();
                 SceneManager.LoadScene("InGame");
             }
 		}

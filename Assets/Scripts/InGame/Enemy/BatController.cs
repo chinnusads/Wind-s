@@ -14,6 +14,8 @@ public class BatController : MonoBehaviour
     [SerializeField]private int startQuadrant;
     [SerializeField]private int nowQuadrant;
     private Vector3 pos;
+    public AudioSource batSE;
+    private float time;
 
     void Start()
     {
@@ -31,6 +33,8 @@ public class BatController : MonoBehaviour
         moveSpeed = startSpeed;
         u_turn = false;
         startQuadrant = Quadrant();
+        batSE.Play();
+        time = 0f;
     }
 
     void FixedUpdate()
@@ -51,6 +55,11 @@ public class BatController : MonoBehaviour
             {
                 Destroy(this.gameObject);
             }
+        }
+        time = time + Time.fixedDeltaTime;
+        if (time > 1f)
+        {
+            batSE.Stop();
         }
     }
 
