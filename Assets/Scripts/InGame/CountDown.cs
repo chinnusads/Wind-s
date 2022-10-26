@@ -9,6 +9,9 @@ public class CountDown : MonoBehaviour
     Text text;
     private float timer, count,timer2;
     public static bool isGameStart,isTimeOut;
+    public AudioSource sceneChangeSE;
+    public AudioSource countDownSE;
+
     void Start()
     {
         text = GetComponent<Text>();
@@ -32,6 +35,7 @@ public class CountDown : MonoBehaviour
 
         if ((count <= 0.5) && (count > 0))
         {
+            countDownSE.Play();
             text.text = "Start";
         }
         if (count <= 0)
@@ -41,11 +45,13 @@ public class CountDown : MonoBehaviour
         }
         if (isTimeOut)
         {
+            countDownSE.Play();
             text.enabled = true;
             text.text = "Time Out!";
             timer2 += Time.deltaTime;
             if (timer2 > 1)
             {
+                sceneChangeSE.Play();
                 SceneManager.LoadScene("Result");
             }
         }

@@ -13,6 +13,7 @@ public class RockController : MonoBehaviour
     private float accelTime;
     public float rotateSpeed;
     private Vector3 pos;
+    public AudioSource rockSE;
 
     void Start()
     {
@@ -29,6 +30,7 @@ public class RockController : MonoBehaviour
         direction = direction.normalized;
         moveSpeed = startSpeed;
         accelTime = 0f;
+        rockSE.Play();
     }
 
     void FixedUpdate()
