@@ -7,7 +7,7 @@ public class GaugeControl : MonoBehaviour
 {
     public static float gaugeCount;
     private float stopCount;
-    public float upSpeed, downSpeed;//ゲージ上昇、落下のスピード
+    public float upSpeed1, upSpeed2;//ゲージ上昇、落下のスピード
     public float stopTime;//ジャンプ３まで貯まるとしばらく動けなくなる
     public static int gaugeCharge; //ジャンプの状態。0ジャンプ不可；1一段階ジャンプでき：２二段階ジャンプでき；３貯まりすぎ動けなくなる
     Image image;
@@ -28,8 +28,16 @@ public class GaugeControl : MonoBehaviour
             //ゲージ上昇時の段階分け
             if (gaugeCount < 1)//ゲージ未満
             {
-                if (((PlayerController.joyconCharge) || (Input.GetKey(KeyCode.G))) && (PlayerController.jumpState == 0))//入力検知
-                    gaugeCount += Time.deltaTime * upSpeed; //ゲージ上昇
+                if ((PlayerController.joyconCharge == 1) || (Input.GetKey(KeyCode.G)))//入力検知
+                {
+                    //Debug.Log("1");
+                    gaugeCount += Time.deltaTime * upSpeed1; //ゲージ上昇
+                }
+                if ((PlayerController.joyconCharge == 2) || (Input.GetKey(KeyCode.G)))//入力検知
+                {
+                    //Debug.Log("2");
+                    gaugeCount += Time.deltaTime * upSpeed2; //ゲージ上昇
+                }
                 if (gaugeCount > 0.6)
                 {
                     gaugeCharge = 2;//2段階ジャンプでき
@@ -39,18 +47,35 @@ public class GaugeControl : MonoBehaviour
                     gaugeCharge = 1;//1段階ジャンプでき
                 }
                 else
+                {
                     gaugeCharge = 0;//ジャンプ不可
+                }       
             }
             else
             {
                 gaugeCount = 1;//ゲージ満タン
                 gaugeCharge = 3;//3段階
             }
-            if (gaugeCount > 0)//落下の判定
+            if (PlayerController.afterJump)
+            {
+                if (gaugeCount > 0.2f)
+                {
+                    gaugeCount = 0.2f;
+                    gaugeCharge = 1;
+                    Debug.Log(gaugeCount);
+                }
+                else
+                {
+                    gaugeCount = 0f;
+                    gaugeCharge = 0;
+                }
+                PlayerController.afterJump = false;
+            }
+            /*if (gaugeCount > 0)//落下の判定
             {
                 if (gaugeCharge < 3)//ゲージ未満
                 {
-                    gaugeCount -= Time.deltaTime * downSpeed;
+                   gaugeCount -= Time.deltaTime * downSpeed;
                     if (gaugeCharge == 2)//2段階まで
                     {
                         if (gaugeCount < 0.6)
@@ -70,6 +95,7 @@ public class GaugeControl : MonoBehaviour
             else
                 gaugeCount = 0;//0の時は落下しない
                                //ゲージの画像表示
+            */
             image.fillAmount = gaugeCount;
             //満タンになる状態
             if (gaugeCharge == 3)

@@ -18,9 +18,9 @@ public class PlayerController : MonoBehaviour
     private Joycon m_joyconR;
 
     private float countingTime;
-    public static bool joyconCharge;
+    public static int joyconCharge;
     private bool joyconJump;
-    public float rotationLimit;
+    public float rotationLimit1, rotationLimit2;
     public float riseLimit;
 
     private float distanceX_R, distanceY_R, distanceX_L, distanceY_L;
@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     private float nowJumpTime;
     public static bool isJump1, isJump2;
     public static int jumpState;// 0:on the ground; 1:first time jump; 2:second time jump;
+    public static bool afterJump;
 
     //anim
     private Animator anim;
@@ -48,7 +49,7 @@ public class PlayerController : MonoBehaviour
         m_joyconL = m_joycons.Find(c => c.isLeft);
         m_joyconR = m_joycons.Find(c => !c.isLeft);
         countingTime = 0;
-        joyconCharge = false;
+        joyconCharge = 0;
         joyconJump = false;
         //jump
         jumpSpeed = 0f;
@@ -56,6 +57,7 @@ public class PlayerController : MonoBehaviour
         isJump1 = false;
         jumpState = 0;
         anim = GetComponent<Animator>();
+        afterJump = false;
     }
 
     void FixedUpdate()
@@ -103,7 +105,7 @@ public class PlayerController : MonoBehaviour
         }
         BottonJump();
         JoyconRotate();
-        if (joyconCharge)
+        if (joyconCharge > 0)
         {
             if (!chargeSE.isPlaying)
             {
@@ -121,17 +123,20 @@ public class PlayerController : MonoBehaviour
     {
         if (countingTime > 0.2f)
         {
-            if (jumpSpeed == 0)
-            {
-                if ((distanceX_L + distanceY_L> rotationLimit) || (distanceX_R + distanceY_R > rotationLimit))
+                if ((distanceX_L + distanceY_L > rotationLimit2) || (distanceX_R + distanceY_R > rotationLimit2))
                 {
-                    joyconCharge = true;
+                    //Debug.Log("2");
+                    joyconCharge = 2;
+                }
+                else if ((distanceX_L + distanceY_L> rotationLimit1) || (distanceX_R + distanceY_R > rotationLimit1))
+                {
+                    //Debug.Log("1");
+                    joyconCharge = 1;
                 }
                 else
                 {
-                    joyconCharge = false;
+                    joyconCharge = 0;
                 }
-            }
             JoyconReset();
         }
     }
@@ -240,7 +245,7 @@ public class PlayerController : MonoBehaviour
         }
         if (joyconJump)
         {
-            joyconCharge = false;
+            joyconCharge = 0;
         }
     }
 
@@ -251,7 +256,8 @@ public class PlayerController : MonoBehaviour
             if ((Input.GetKeyDown(KeyCode.Space) || joyconJump) && (GaugeControl.gaugeCharge > 0) && (GaugeControl.gaugeCharge < 3))
             {
                 jumpState = 1;
-                joyconCharge = false;
+                joyconCharge = 0;
+                afterJump = true;
                 if (GaugeControl.gaugeCharge == 1)
                 {
                     isJump1 = true;
@@ -273,7 +279,7 @@ public class PlayerController : MonoBehaviour
         {
             if ((Input.GetKeyDown(KeyCode.Space) || joyconJump) && (GaugeControl.gaugeCharge == 1))
             {
-                joyconCharge = false;
+                joyconCharge = 0;
                 jumpState = 2;
                 isJump1 = true;
                 isJump2 = false;

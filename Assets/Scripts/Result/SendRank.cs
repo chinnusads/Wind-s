@@ -28,6 +28,8 @@ public class SendRank : MonoBehaviour
     public AudioSource rankSE;
     public AudioSource sceneChangeSE;
 
+    public float freezTime;
+
     void Start()
     {
         text = GetComponent<Text>();
@@ -39,6 +41,7 @@ public class SendRank : MonoBehaviour
         m_joyconL = m_joycons.Find(c => c.isLeft);
         m_joyconR = m_joycons.Find(c => !c.isLeft);
         buttonInput = false;
+        timer = 0;
     }
 
     // Update is called once per frame
@@ -70,9 +73,10 @@ public class SendRank : MonoBehaviour
         {
             rankSE.Play();
             text.enabled = true;
+            timer = 0f;
         }
         JoyconInput();
-        if (buttonInput&&!_resultSent)
+        if ((timer > freezTime) && (buttonInput&&!_resultSent))
         {
             sceneChangeSE.Play();
             Nissensai.SendResult(rank);
