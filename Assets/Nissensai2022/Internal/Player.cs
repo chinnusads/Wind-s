@@ -52,7 +52,7 @@ namespace Nissensai2022.Runtime
         /// </summary>
         public bool IsReady { get; private set; } = false;
 
-        internal Player()
+        public Player()
         {
         }
 
@@ -93,7 +93,7 @@ namespace Nissensai2022.Runtime
             yield return UpdatePlayerInfo(Id);
         }
 
-        internal IEnumerator UpdatePlayerInfo(int playerId)
+        public IEnumerator UpdatePlayerInfo(int playerId)
         {
             IsReady = false;
             Id = playerId;

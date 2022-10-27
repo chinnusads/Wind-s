@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Nissensai2022.Runtime;
@@ -90,11 +91,18 @@ namespace Nissensai2022.A
 			while (true)
 			{
 				yield return _commandToHandleList.Update();
-				while (_commandToHandleList.HasNext)
+				try
 				{
-					newCommandHandler.Invoke(_commandToHandleList.Next);
+					while (_commandToHandleList.HasNext)
+					{
+						newCommandHandler.Invoke(_commandToHandleList.Next);
+					}
 				}
-
+				catch (Exception e)
+				{
+					Logger.Warn(e.Message);
+				}
+				
 				yield return new WaitForSeconds(waitTime);
 			}
 		}

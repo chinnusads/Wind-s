@@ -16,12 +16,14 @@ namespace Nissensai2022.A
 
 		public static List<Player> Players => _dictionary.Values.ToList();
 
-		internal static void NewPlayer(int playerId)
+		internal static IEnumerator NewPlayer(int playerId)
 		{
 			if (_dictionary.ContainsKey(playerId))
-				return;
-			_dictionary.Add(playerId, new Player(playerId));
-			CommandHandler.Instance.newPlayerHandler.Invoke(PlayerList.GetPlayerInfo(playerId));
+				yield break;
+			Player player = new Player();
+			yield return player.UpdatePlayerInfo(playerId);
+			_dictionary.Add(playerId, player);
+			CommandHandler.Instance.newPlayerHandler.Invoke(player);
 		}
 
 		public static Player GetPlayerInfo(int playerId)
@@ -87,14 +89,21 @@ namespace Nissensai2022.A
 			}
 		}
 
-		public static void Update(int playerId)
+		public static IEnumerator Update(int playerId)
 		{
+			Player player = new Player();
 			if (_dictionary.ContainsKey(playerId))
-				_dictionary[playerId].UpdatePlayerInfo();
+			{
+				yield return _dictionary[playerId].UpdatePlayerInfo();
+				player = _dictionary[playerId];
+			}
 			else
-				_dictionary.Add(playerId, new Player(playerId));
+			{
+				yield return player.UpdatePlayerInfo(playerId);
+				_dictionary.Add(playerId,player);
+			}
 
-			CommandHandler.Instance.playerParamaterChangedHandler.Invoke(PlayerList.GetPlayerInfo(playerId));
+			CommandHandler.Instance.playerParamaterChangedHandler.Invoke(player);
 		}
 
 		internal static string ListPlayer()
