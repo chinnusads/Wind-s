@@ -44,6 +44,7 @@ namespace Nissensai2022.Internal
 
         [SerializeField] private Image qrCodeImage;
         [SerializeField] private InputField playerIdInput;
+        [SerializeField] private GameObject digitPad;
 
 
         private static string _gameToken = "";
@@ -84,6 +85,7 @@ namespace Nissensai2022.Internal
                     RunTask(GetNewGameToken());
                     if (!Instance.qrCodeDisplayManually)
                         Nissensai.ShowQrCode();
+                    Instance.playerIdInput.ActivateInputField();
                 }
 
                 _status = value;
@@ -111,7 +113,19 @@ namespace Nissensai2022.Internal
             Logger.Log($"Base Url: {BaseUrl}");
             Status = SystemStatus.Idle;
             _qrCodeAnm = panel.GetComponent<Animation>();
-            playerIdInput.onSubmit.AddListener((value) => { StartCoroutine(SendStart(Int32.Parse(value))); });
+            playerIdInput.onSubmit.AddListener((value) =>
+            {
+                try
+                {
+                    StartCoroutine(SendStart(Int32.Parse(value)));
+                }
+                catch (Exception e)
+                {
+                    playerIdInput.ActivateInputField();
+                    Logger.Warn(e.Message);
+                    playerIdInput.text = "";
+                }
+            });
             Nissensai.AddConsoleMethod("GetNewToken", GetNewToken);
             Nissensai.AddConsoleMethod("SendResult", ResultUploader.SendResult);
             Nissensai.AddConsoleMethod("ReloadPlayerInfo", ReloadPlayerInfo);
@@ -147,7 +161,7 @@ namespace Nissensai2022.Internal
             return "    Fetching...";
         }
 
-        private IEnumerator SendStart(int playerId)
+        internal IEnumerator SendStart(int playerId)
         {
             playerIdInput.DeactivateInputField();
             playerIdInput.enabled = false;
@@ -177,10 +191,9 @@ namespace Nissensai2022.Internal
                 Loadding.LoaddingManager.Hide();
                 yield break;
             }
-
+            digitPad.SetActive(false);
             playerIdInput.text = "";
             playerIdInput.enabled = true;
-            playerIdInput.ActivateInputField();
             Loadding.LoaddingManager.Hide();
         }
 
@@ -290,6 +303,18 @@ namespace Nissensai2022.Internal
 
                 yield return new WaitForSeconds(waitTime);
             }
+        }
+
+        private void Update()
+        {
+            if (playerIdInput.isFocused)
+            {
+                digitPad.SetActive(true);
+            }
+            /*else
+            {
+                digitPad.SetActive(false);
+            }*/
         }
     }
 }

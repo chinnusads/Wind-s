@@ -41,7 +41,7 @@ namespace Nissensai2022.Danmaku
 					UnityWebRequest.Get(
 						$"{DanmakuHandler.BaseUrl}/api/game/log?playerId={playerId}&password={DanmakuHandler.Instance.password}&content={danmaku}");
 				request.timeout = DanmakuHandler.Instance.timeout;
-				Loadding.LoaddingManager.Show();
+				//Loadding.LoaddingManager.Show();
 				yield return request.SendWebRequest();
 				if (request.result != UnityWebRequest.Result.Success)
 				{
@@ -59,7 +59,7 @@ namespace Nissensai2022.Danmaku
 				success = true;
 			} while (!success && tryTime < DanmakuHandler.Instance.retryTime);
 
-			Loadding.LoaddingManager.Hide();
+			//Loadding.LoaddingManager.Hide();
 			if (!success)
 			{
 				Logger.Warn("Failed to send danmaku to server.");

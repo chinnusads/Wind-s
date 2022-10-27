@@ -13,7 +13,7 @@ namespace Nissensai2022.ExceptionHandler
         private string _logPath;
         private string _bugExePath;
 
-#if !UNITY_EDITOR
+#if UNITY_EDITOR
         void Awake()
         {
             _logPath = Application.dataPath.Substring(0, Application.dataPath.LastIndexOf("/"))+"/log";
@@ -24,9 +24,9 @@ namespace Nissensai2022.ExceptionHandler
                 Directory.CreateDirectory(_logPath);
             Application.logMessageReceived += Handler;
             //Application.RegisterLogCallback( Handler );  
-            
-            Debug.Log(_bugExePath);
 
+            if (File.Exists(_logPath + "/dontcrash.gxt"))
+                isQuitWhenException = false;
             DontDestroyOnLoad(gameObject);
         }
 
