@@ -1,0 +1,151 @@
+[time] 2022/10/28 20:31:30
+[type] Exception
+
+[exception message]
+UnassignedReferenceException: The variable digitPad of SystemStatusManager has not been assigned.
+You probably need to assign the digitPad variable of the SystemStatusManager script in the inspector.
+
+[stack trace]
+Nissensai2022.Internal.SystemStatusManager.Update () (at Assets/Nissensai2022/Internal/SystemStatusManager.cs:312)
+
+[time] 2022/10/28 20:31:30
+[type] Exception
+
+[exception message]
+UnassignedReferenceException: The variable digitPad of SystemStatusManager has not been assigned.
+You probably need to assign the digitPad variable of the SystemStatusManager script in the inspector.
+
+[stack trace]
+Nissensai2022.Internal.SystemStatusManager.Update () (at Assets/Nissensai2022/Internal/SystemStatusManager.cs:312)
+
+[time] 2022/10/28 20:31:30
+[type] Exception
+
+[exception message]
+UnassignedReferenceException: The variable digitPad of SystemStatusManager has not been assigned.
+You probably need to assign the digitPad variable of the SystemStatusManager script in the inspector.
+
+[stack trace]
+Nissensai2022.Internal.SystemStatusManager.Update () (at Assets/Nissensai2022/Internal/SystemStatusManager.cs:312)
+
+[time] 2022/10/28 20:31:30
+[type] Exception
+
+[exception message]
+UnassignedReferenceException: The variable digitPad of SystemStatusManager has not been assigned.
+You probably need to assign the digitPad variable of the SystemStatusManager script in the inspector.
+
+[stack trace]
+Nissensai2022.Internal.SystemStatusManager.Update () (at Assets/Nissensai2022/Internal/SystemStatusManager.cs:312)
+
+[time] 2022/10/28 20:31:30
+[type] Exception
+
+[exception message]
+UnassignedReferenceException: The variable digitPad of SystemStatusManager has not been assigned.
+You probably need to assign the digitPad variable of the SystemStatusManager script in the inspector.
+
+[stack trace]
+Nissensai2022.Internal.SystemStatusManager.Update () (at Assets/Nissensai2022/Internal/SystemStatusManager.cs:312)
+
+[time] 2022/10/28 20:31:30
+[type] Exception
+
+[exception message]
+UnassignedReferenceException: The variable digitPad of SystemStatusManager has not been assigned.
+You probably need to assign the digitPad variable of the SystemStatusManager script in the inspector.
+
+[stack trace]
+Nissensai2022.Internal.SystemStatusManager.Update () (at Assets/Nissensai2022/Internal/SystemStatusManager.cs:312)
+
+[time] 2022/10/28 20:31:30
+[type] Exception
+
+[exception message]
+UnassignedReferenceException: The variable digitPad of SystemStatusManager has not been assigned.
+You probably need to assign the digitPad variable of the SystemStatusManager script in the inspector.
+
+[stack trace]
+Nissensai2022.Internal.SystemStatusManager.Update () (at Assets/Nissensai2022/Internal/SystemStatusManager.cs:312)
+
+[time] 2022/10/28 20:31:30
+[type] Exception
+
+[exception message]
+UnassignedReferenceException: The variable digitPad of SystemStatusManager has not been assigned.
+You probably need to assign the digitPad variable of the SystemStatusManager script in the inspector.
+
+[stack trace]
+Nissensai2022.Internal.SystemStatusManager.Update () (at Assets/Nissensai2022/Internal/SystemStatusManager.cs:312)
+
+[time] 2022/10/28 20:31:30
+[type] Exception
+
+[exception message]
+UnassignedReferenceException: The variable digitPad of SystemStatusManager has not been assigned.
+You probably need to assign the digitPad variable of the SystemStatusManager script in the inspector.
+
+[stack trace]
+Nissensai2022.Internal.SystemStatusManager.Update () (at Assets/Nissensai2022/Internal/SystemStatusManager.cs:312)
+
+[time] 2022/10/28 20:31:30
+[type] Exception
+
+[exception message]
+UnassignedReferenceException: The variable digitPad of SystemStatusManager has not been assigned.
+You probably need to assign the digitPad variable of the SystemStatusManager script in the inspector.
+
+[stack trace]
+Nissensai2022.Internal.SystemStatusManager.Update () (at Assets/Nissensai2022/Internal/SystemStatusManager.cs:312)
+
+[time] 2022/10/28 20:31:30
+[type] Exception
+
+[exception message]
+UnassignedReferenceException: The variable digitPad of SystemStatusManager has not been assigned.
+You probably need to assign the digitPad variable of the SystemStatusManager script in the inspector.
+
+[stack trace]
+Nissensai2022.Internal.SystemStatusManager.Update () (at Assets/Nissensai2022/Internal/SystemStatusManager.cs:312)
+
+[time] 2022/10/28 20:31:30
+[type] Exception
+
+[exception message]
+UnassignedReferenceException: The variable digitPad of SystemStatusManager has not been assigned.
+You probably need to assign the digitPad variable of the SystemStatusManager script in the inspector.
+
+[stack trace]
+Nissensai2022.Internal.SystemStatusManager.Update () (at Assets/Nissensai2022/Internal/SystemStatusManager.cs:312)
+
+[time] 2022/10/28 20:31:30
+[type] Exception
+
+[exception message]
+UnassignedReferenceException: The variable digitPad of SystemStatusManager has not been assigned.
+You probably need to assign the digitPad variable of the SystemStatusManager script in the inspector.
+
+[stack trace]
+Nissensai2022.Internal.SystemStatusManager.Update () (at Assets/Nissensai2022/Internal/SystemStatusManager.cs:312)
+
+[time] 2022/10/28 20:31:30
+[type] Exception
+
+[exception message]
+UnassignedReferenceException: The variable digitPad of SystemStatusManager has not been assigned.
+You probably need to assign the digitPad variable of the SystemStatusManager script in the inspector.
+
+[stack trace]
+Nissensai2022.Internal.SystemStatusManager.Update () (at Assets/Nissensai2022/Internal/SystemStatusManager.cs:312)
+
+[time] 2022/10/28 20:31:30
+[type] Exception
+
+[exception message]
+UnassignedReferenceException: The variable digitPad of SystemStatusManager has not been assigned.
+You probably need to assign the digitPad variable of the SystemStatusManager script in the inspector.
+
+[stack trace]
+Nissensai2022.Internal.SystemStatusManager+<SendStart>d__39.MoveNext () (at Assets/Nissensai2022/Internal/SystemStatusManager.cs:194)
+UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <5e24da9c972e4f5888d47a5ad4e28202>:0)
+

@@ -1,5 +1,8 @@
 using System;
+using System.Collections;
+using Newtonsoft.Json.Linq;
 using Nissensai2022.Internal;
+using UnityEngine.Networking;
 
 namespace Nissensai2022.Runtime
 {
@@ -78,6 +81,50 @@ namespace Nissensai2022.Runtime
         public static void AddConsoleMethod(string command, Func<string,string> method)
         {
             Nissensai2022.Console.Console.AddMethod(command, method);
+        }
+
+        public static void ChangeCommand(int playerId, int commandId)
+        {
+            SystemStatusManager.RunTask(ChangeCommandCoroutine(playerId, commandId));
+        }
+
+        private static IEnumerator ChangeCommandCoroutine(int playerId, int commandId)
+        {
+            bool isOk = false;
+            int retryCount = 3;
+            Logger.Log($"Sending command change {playerId} {commandId}");
+            do
+            {
+                var url =
+                    $"{SystemStatusManager.BaseUrl}/api/player/command" +
+                    $"?playerId={playerId}" +
+                    $"&command={commandId}";
+                var request = UnityWebRequest.Get(url);
+                request.timeout = SystemStatusManager.Instance.timeout;
+                Loadding.LoaddingManager.Show();
+                yield return request.SendWebRequest();
+                if (request.result != UnityWebRequest.Result.Success)
+                {
+                    Logger.Warn(request.error);
+                    continue;
+                }
+
+                JObject result = JObject.Parse(request.downloadHandler.text);
+                if (result["state"].Value<string>() != "ok")
+                {
+                    Logger.Error(result["msg"].Value<string>());
+                    continue;
+                }
+
+                Logger.Log($"Command change ok.");
+                isOk = true;
+            } while (!isOk && retryCount < SystemStatusManager.RetryTime);
+
+            Loadding.LoaddingManager.Hide();
+            if (!isOk)
+            {
+                Logger.Error($"Failed to send command change({commandId}) for player({playerId})");
+            }
         }
         
     }
