@@ -43,8 +43,7 @@ public class TutorialController : MonoBehaviour
 
     void FixedUpdate()
     {
-        
-            JoyconInput();
+        JoyconInput();
      
     }
 
