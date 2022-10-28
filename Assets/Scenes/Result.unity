@@ -1300,9 +1300,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rank: 0
-  maxTime: 2.1
+  maxTime: 2
   rankSE: {fileID: 1874235668}
   sceneChangeSE: {fileID: 1874235665}
+  freezTime: 2
 --- !u!114 &1874235667
 MonoBehaviour:
   m_ObjectHideFlags: 0

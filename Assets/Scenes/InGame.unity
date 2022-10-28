@@ -365,8 +365,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c6c1fbc0505a844c8be1b4aceccf32f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upSpeed: 0.4
-  downSpeed: 0.1
+  upSpeed1: 0.2
+  upSpeed2: 0.4
   stopTime: 1
 --- !u!114 &133594245
 MonoBehaviour:
@@ -674,13 +674,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 277beaa3ffd0a534d88a0b1b347e71b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationLimit: 1.6
+  rotationLimit1: 1.6
+  rotationLimit2: 2.2
   riseLimit: 1.2
   accelLimit: 2.6
   jumpStartSpeed1: 3
   jumpStartSpeed2: 4
-  gravity1: 2
-  gravity2: 4
+  gravity1: 4
+  gravity2: 5
   jumpTime1: 0.7
   jumpTime2: 1
   jump1SE: {fileID: 288798552}
